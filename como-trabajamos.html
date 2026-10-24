@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cómo trabajamos | Kipu360</title>
+  <meta name="description" content="Del documento disperso al dato publicado: diagnóstico, orden, publicación y consulta. Formatos abiertos y estado de cada función.">
+  <link rel="canonical" href="https://kipu360.github.io/como-trabajamos.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Kipu360">
+  <meta property="og:title" content="Cómo trabajamos | Kipu360">
+  <meta property="og:description" content="Del documento disperso al dato publicado, con procedencia verificable.">
+  <meta property="og:url" content="https://kipu360.github.io/como-trabajamos.html">
+  <meta property="og:image" content="https://kipu360.github.io/assets/img/brand/social-card-1200x630.png">
+  <meta name="theme-color" content="#12343a">
+  <link rel="icon" href="assets/img/brand/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="assets/img/brand/favicon-64.png" sizes="64x64">
+  <link rel="preload" href="assets/fonts/manrope-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/manrope-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Kipu360, inicio">
+      <img src="assets/img/brand/logo-horizontal.svg" alt="Kipu360" width="168" height="42">
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html#que-hacemos">Qué hacemos</a>
+      <a href="como-trabajamos.html" aria-current="page">Cómo trabajamos</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a class="button" href="mailto:contacto@kipu360.com">Escríbenos</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <section class="hero wrap">
+    <p class="kicker">Cómo trabajamos</p>
+    <h1>Del documento disperso al dato publicado.</h1>
+    <p class="lead">No empezamos por la herramienta. Empezamos por entender qué datos existen, quién responde por ellos y qué decisiones tienen que sostener.</p>
+  </section>
+
+  <section class="section mist">
+    <div class="wrap">
+      <p class="kicker">El proceso</p>
+      <h2>Cuatro pasos, con entregables en cada uno.</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-n">01</span>
+          <h3>Diagnóstico</h3>
+          <p>Qué hay, en qué formato, con qué calidad y qué falta. Inventario y prioridades.</p>
+        </li>
+        <li>
+          <span class="step-n">02</span>
+          <h3>Orden y documentación</h3>
+          <p>Limpieza, normalización y linaje. Cada registro apunta a su archivo de origen.</p>
+        </li>
+        <li>
+          <span class="step-n">03</span>
+          <h3>Publicación</h3>
+          <p>Parquet, GeoParquet, PMTiles y COG, con catálogo STAC y control de acceso si hace falta.</p>
+        </li>
+        <li>
+          <span class="step-n">04</span>
+          <h3>Consulta y análisis</h3>
+          <p>Visor, series y asistente. La respuesta siempre se puede rastrear hasta el registro.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Formatos</p>
+        <h2>Cada formato resuelve un problema.</h2>
+        <p class="lead" style="margin-top:1.25rem">Elegimos el formato por la pregunta que tiene que responder, no por moda.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <caption>Formatos de publicación y para qué sirve cada uno</caption>
+          <thead>
+            <tr><th scope="col">Formato</th><th scope="col">Para qué sirve</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Parquet</th><td>Tablas analíticas. Se consultan sin cargar todo en memoria.</td></tr>
+            <tr><th scope="row">GeoParquet</th><td>Tablas con geometría. Vectorial que se lee desde Python, DuckDB o QGIS.</td></tr>
+            <tr><th scope="row">PMTiles</th><td>Mapas vectoriales en un solo archivo. Se sirven sin tile server.</td></tr>
+            <tr><th scope="row">COG</th><td>Rasters con overviews. Se lee solo la ventana que hace falta.</td></tr>
+            <tr><th scope="row">STAC</th><td>Catálogo. Describe qué hay, dónde y con qué licencia.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section mist">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Propiedad</p>
+        <h2>Qué queda de tu lado y qué hacemos nosotros.</h2>
+      </div>
+      <div class="prose">
+        <p><strong>Del cliente:</strong> los datos, las cuentas de almacenamiento, el dominio y la decisión sobre quién puede ver cada capa.</p>
+        <p><strong>Nuestro:</strong> el orden, la documentación del linaje, la publicación, el visor y el soporte. La metodología es pública y versionada.</p>
+        <p>El hosting queda en almacenamiento de objetos. No hay servidores que mantener ni bases de datos que administrar para servir los datos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="kicker">Estado</p>
+      <h2>Qué está disponible hoy y qué sigue en definición.</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Estado de cada función, a la fecha de publicación de esta página</caption>
+          <thead>
+            <tr><th scope="col">Función</th><th scope="col">Estado</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Ordenar y documentar datos</th><td><span class="state available">Disponible</span></td></tr>
+            <tr><th scope="row">Publicar catálogo STAC y capas</th><td><span class="state available">Disponible</span></td></tr>
+            <tr><th scope="row">Visor web de datos</th><td><span class="state pilot">Piloto</span></td></tr>
+            <tr><th scope="row">Asistente de IA sobre los datos</th><td><span class="state defined">En definición</span></td></tr>
+            <tr><th scope="row">Perfil abierto de monitoreo ambiental</th><td><span class="state defined">En definición</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lead" style="margin-top:1.5rem">Si tu caso no encaja en lo disponible, lo decimos antes de empezar.</p>
+    </div>
+  </section>
+
+  <section class="section ink">
+    <div class="wrap split">
+      <div>
+        <p class="kicker" style="color:#E59A6C">Siguiente paso</p>
+        <h2>Un piloto con tus datos.</h2>
+      </div>
+      <div>
+        <p class="lead">Empezamos con un conjunto acotado y un problema concreto. Medimos cuánto tiempo se ahorra y qué se puede responder que antes no se podía.</p>
+        <p style="margin-top:1.5rem"><a class="button" href="mailto:contacto@kipu360.com">Hablemos del piloto</a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="top">
+      <img src="assets/img/brand/logo-symbol-mono.svg" alt="" width="40" height="40">
+      <nav aria-label="Pie">
+        <a href="index.html#que-hacemos">Qué hacemos</a>
+        <a href="como-trabajamos.html">Cómo trabajamos</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="mailto:contacto@kipu360.com">Contacto</a>
+      </nav>
+    </div>
+    <p>Información ambiental y geoespacial, con origen verificable.</p>
+    <p>© 2026 Kipu360.</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kipu360 | Infraestructura de datos ambientales y geoespaciales</title>
+  <meta name="description" content="Organizamos, documentamos y publicamos información ambiental y geoespacial para que pueda encontrarse, cruzarse y verificarse. Datos abiertos, con origen verificable.">
+  <link rel="canonical" href="https://kipu360.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Kipu360">
+  <meta property="og:title" content="Kipu360 | Infraestructura de datos ambientales y geoespaciales">
+  <meta property="og:description" content="Organizamos, documentamos y publicamos información ambiental y geoespacial con origen verificable.">
+  <meta property="og:url" content="https://kipu360.github.io/">
+  <meta property="og:image" content="https://kipu360.github.io/assets/img/brand/social-card-1200x630.png">
+  <meta name="theme-color" content="#12343a">
+  <link rel="icon" href="assets/img/brand/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="assets/img/brand/favicon-64.png" sizes="64x64">
+  <link rel="preload" href="assets/fonts/manrope-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/manrope-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Kipu360, inicio">
+      <img src="assets/img/brand/logo-horizontal.svg" alt="Kipu360" width="168" height="42">
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#que-hacemos">Qué hacemos</a>
+      <a href="como-trabajamos.html">Cómo trabajamos</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a class="button" href="mailto:contacto@kipu360.com">Escríbenos</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <section class="hero wrap">
+    <h1>Una infraestructura para organizar toda la información ambiental y geoespacial.</h1>
+    <p class="lead">Reunimos datos dispersos en PDF, hojas de cálculo, shapefiles y portales. Los ordenamos, documentamos su origen y los publicamos para que puedan encontrarse, cruzarse y verificarse.</p>
+    <div class="hero-actions">
+      <a class="button" href="mailto:contacto@kipu360.com">Cuéntanos tu caso</a>
+      <a class="button ghost" href="como-trabajamos.html">Cómo trabajamos</a>
+    </div>
+  </section>
+
+  <section class="section mist">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">El problema</p>
+        <h2>Cada dato debe poder responder de dónde vino y qué se hizo con él.</h2>
+      </div>
+      <div class="prose">
+        <p>Los estudios ambientales viven en carpetas, correos y sistemas que no se hablan. Reconstruir un antecedente toma días. Comparar dos campañas obliga a volver al PDF original. Y cuando alguien deja el equipo, se va también el criterio con el que se armó la base.</p>
+        <p>No falta información. Falta infraestructura para ordenarla y confiar en ella.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="que-hacemos">
+    <div class="wrap">
+      <p class="kicker">Qué hacemos</p>
+      <h2>Integrar, publicar y consultar sin perder la procedencia.</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Integrar y documentar</h3>
+          <p>Unificamos fuentes distintas y guardamos el origen de cada registro. Cada corrección queda registrada. Nada se borra en silencio.</p>
+        </article>
+        <article class="card">
+          <h3>Publicar sin servidores</h3>
+          <p>Pasamos los datos a formatos abiertos y optimizados para la nube: GeoParquet, PMTiles y COG, con un catálogo STAC. El cliente conserva el dato y no paga servidores dedicados.</p>
+        </article>
+        <article class="card">
+          <h3>Consultar y analizar</h3>
+          <p>Visores, series históricas y asistentes que responden con la fuente a la vista. Cada respuesta se puede rastrear hasta el registro original.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section mist">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">El recorrido del dato</p>
+        <h2>Fuente, transformación, resultado.</h2>
+        <p class="lead" style="margin-top:1.25rem">El mismo camino para cada conjunto. Entra el documento, sale un dato con origen.</p>
+      </div>
+      <figure class="diagram">
+        <div class="flow">
+          <div class="flow-step">
+            <span class="flow-label">Fuente</span>
+            <p>PDF, hojas de cálculo, shapefiles y portales</p>
+          </div>
+          <div class="flow-step">
+            <span class="flow-label">Transformación</span>
+            <p>OCR solo si hace falta, limpieza y Parquet</p>
+          </div>
+          <div class="flow-step">
+            <span class="flow-label">Resultado</span>
+            <p>Catálogo STAC, visor y consulta</p>
+          </div>
+        </div>
+        <figcaption>Cada registro conserva el vínculo con su archivo de origen. Si un dato requiere revisión, lo indicamos en vez de atribuirle una certeza que no tiene.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section ink">
+    <div class="wrap">
+      <p class="kicker" style="color:#E59A6C">Principios</p>
+      <h2>Nada se borra en silencio.</h2>
+      <ul class="principles">
+        <li>Cada dato conserva el vínculo con su fuente.</li>
+        <li>Cada corrección queda registrada.</li>
+        <li>Los datos privados siguen siendo del cliente.</li>
+        <li>El código base y los catálogos públicos son abiertos.</li>
+        <li>Cobramos por el servicio y la integración, no por el dato público.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="kicker">Para quién</p>
+      <h2>Para quien produce, gestiona o usa información del territorio.</h2>
+      <ul class="audiences">
+        <li><strong>Instituciones públicas</strong><span>Que necesitan publicar datos y responder por ellos.</span></li>
+        <li><strong>Minería y energía</strong><span>Que sostienen compromisos ambientales y auditorías.</span></li>
+        <li><strong>Agua y saneamiento</strong><span>Que monitorean calidad y operan con series largas.</span></li>
+        <li><strong>Universidades y centros de investigación</strong><span>Que producen datos y quieren reutilizarlos.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section mist">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Quiénes somos</p>
+        <h2>Construimos infraestructura de datos desde el Perú.</h2>
+      </div>
+      <div class="prose">
+        <p>Kipu360 nace de más de una década de trabajo con datos ambientales y geoespaciales en el sector minero, el Estado y la academia. Conocemos el problema desde dentro: los datos existen, pero llegan tarde, incompletos y sin rastro de quién los tocó.</p>
+        <p><a href="nosotros.html">Quiénes somos y cómo pensamos</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap contact">
+      <div>
+        <p class="kicker">Contacto</p>
+        <h2>Cuéntanos qué datos tienes y qué necesitas hacer con ellos.</h2>
+      </div>
+      <a class="button" href="mailto:contacto@kipu360.com">contacto@kipu360.com</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="top">
+      <img src="assets/img/brand/logo-symbol-mono.svg" alt="" width="40" height="40">
+      <nav aria-label="Pie">
+        <a href="index.html#que-hacemos">Qué hacemos</a>
+        <a href="como-trabajamos.html">Cómo trabajamos</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="mailto:contacto@kipu360.com">Contacto</a>
+      </nav>
+    </div>
+    <p>Información ambiental y geoespacial, con origen verificable.</p>
+    <p>© 2026 Kipu360.</p>
+  </div>
+</footer>
+
+</body>
+</html>

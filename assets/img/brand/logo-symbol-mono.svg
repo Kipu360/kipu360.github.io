@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 10 88 80" role="img" aria-label="Símbolo Kipu360">
+<title>Símbolo Kipu360</title>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M13 21C33 26 65 26 85 21" stroke="#12343A" stroke-width="7"/>
+  <path d="M27 24V38 M27 54V77 M50 25V53 M50 69V85 M73 24V35 M73 51V66" stroke="#12343A" stroke-width="6"/>
+  <circle cx="27" cy="46" r="6.5" stroke="#12343A" stroke-width="5"/>
+  <circle cx="50" cy="61" r="6.5" stroke="#12343A" stroke-width="5"/>
+  <circle cx="73" cy="43" r="6.5" stroke="#12343A" stroke-width="5"/>
+</g>
+</svg>

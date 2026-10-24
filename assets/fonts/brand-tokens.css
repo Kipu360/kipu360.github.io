@@ -1,0 +1,15 @@
+:root {
+  --kipu-ink: #12343a;
+  --kipu-earth: #b45638;
+  --kipu-cream: #f7f7f1;
+  --kipu-mist: #e9eeeb;
+  --kipu-slate: #526b70;
+  --kipu-earth-tint: #f2dfd6;
+  --kipu-chart-blue: #2b6ea4;
+  --kipu-chart-gold: #ad7d22;
+  --kipu-chart-violet: #765b91;
+  --kipu-verified: #2b6e5a;
+  --kipu-pending: #a37122;
+  --kipu-unavailable: #78868a;
+  --kipu-font: "Manrope", Arial, sans-serif;
+}

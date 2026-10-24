@@ -1,0 +1,22 @@
+/* Kipu360 · tokens de marca (copia de brand-tokens.css) + escala del sitio */
+:root {
+  --kipu-ink: #12343a;
+  --kipu-earth: #b45638;
+  --kipu-cream: #f7f7f1;
+  --kipu-mist: #e9eeeb;
+  --kipu-slate: #526b70;
+  --kipu-earth-tint: #f2dfd6;
+  --kipu-chart-blue: #2b6ea4;
+  --kipu-chart-gold: #ad7d22;
+  --kipu-chart-violet: #765b91;
+  --kipu-verified: #2b6e5a;
+  --kipu-pending: #a37122;
+  --kipu-unavailable: #78868a;
+  --kipu-font: "Manrope", Arial, sans-serif;
+
+  --wrap: 72rem;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --section: clamp(3.5rem, 7vw, 6rem);
+  --measure: 65ch;
+  --radius: 2px;
+}
