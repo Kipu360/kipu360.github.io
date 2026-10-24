@@ -147,7 +147,9 @@ p + p { margin-top: 1rem; }
 .section.mist { background: var(--kipu-mist); }
 .section.ink { background: var(--kipu-ink); color: var(--kipu-cream); }
 .section.ink a { color: var(--kipu-cream); }
+.kicker.on-ink { color: var(--kipu-earth-light); }
 .section.mist .kicker { color: var(--kipu-ink); }
+.section.mist .prose a { color: var(--kipu-ink); }
 .section.ink .lead { color: rgba(247, 247, 241, 0.78); }
 
 .kicker {
@@ -177,6 +179,9 @@ p + p { margin-top: 1rem; }
 
 .prose { max-width: var(--measure); color: var(--kipu-slate); }
 .prose strong { color: var(--kipu-ink); font-weight: 600; }
+
+.spaced { margin-top: 1.5rem; }
+.spaced-sm { margin-top: 1.25rem; }
 
 /* Hero */
 .hero { padding-block: clamp(3.5rem, 8vw, 7rem); }
@@ -291,8 +296,8 @@ tbody th { font-weight: 600; }
 .state { display: inline-flex; align-items: center; gap: 0.45rem; font-weight: 600; font-size: 0.9rem; }
 .state::before { content: ""; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: currentColor; }
 .state.available { color: var(--kipu-verified); }
-.state.pilot { color: var(--kipu-pending); }
-.state.defined { color: var(--kipu-unavailable); }
+.state.pilot { color: #7d5a20; }
+.state.defined { color: #5a6a6e; }
 
 /* Contact */
 .contact { display: grid; gap: 1.5rem; align-items: end; }
