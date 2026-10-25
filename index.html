@@ -4,17 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kipu360 | Infraestructura de datos ambientales y geoespaciales</title>
-  <meta name="description" content="Empresa peruana de tecnología. Organizamos y documentamos información ambiental y geoespacial para que pueda encontrarse, cruzarse y verificarse.">
+  <meta name="description" content="Empresa peruana de tecnología. Organizamos información ambiental y geoespacial dispersa, documentamos su procedencia y la publicamos en formatos abiertos.">
   <link rel="canonical" href="https://kipu360.github.io/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Kipu360">
+  <meta property="og:locale" content="es_PE">
   <meta property="og:title" content="Kipu360 | Infraestructura de datos ambientales y geoespaciales">
-  <meta property="og:description" content="Empresa peruana de tecnología. Información ambiental y geoespacial, con procedencia verificable.">
+  <meta property="og:description" content="Información ambiental y geoespacial, con origen verificable. Catálogo STAC, formatos abiertos y visor sin servidores dedicados.">
   <meta property="og:url" content="https://kipu360.github.io/">
   <meta property="og:image" content="https://kipu360.github.io/assets/img/brand/social-card-1200x630.png">
+  <meta property="og:image:alt" content="Kipu360: infraestructura de datos ambientales y geoespaciales">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kipu360.github.io/assets/img/brand/social-card-1200x630.png">
   <meta name="theme-color" content="#12343a">
   <link rel="icon" href="assets/img/brand/favicon-32.png" sizes="32x32">
   <link rel="icon" href="assets/img/brand/favicon-64.png" sizes="64x64">
@@ -23,13 +26,89 @@
   <link rel="preload" href="assets/fonts/manrope-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://kipu360.github.io/#organization",
+        "name": "Kipu360",
+        "url": "https://kipu360.github.io/",
+        "logo": "https://kipu360.github.io/assets/img/brand/logo-horizontal-1600.png",
+        "description": "Infraestructura para organizar, publicar y consultar información ambiental y geoespacial con origen verificable.",
+        "foundingLocation": {"@type": "Place", "name": "Perú"},
+        "sameAs": ["https://github.com/Kipu360"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://kipu360.github.io/#website",
+        "url": "https://kipu360.github.io/",
+        "name": "Kipu360",
+        "inLanguage": "es-PE",
+        "publisher": {"@id": "https://kipu360.github.io/#organization"}
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://kipu360.github.io/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Los datos públicos son gratuitos?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Sí. Los datos públicos permanecen abiertos y gratuitos. Cobramos por diseñar la infraestructura, integrar las fuentes, desarrollar herramientas y dar soporte, no por el dato público."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué pasa con nuestros datos privados?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Siguen siendo del cliente. No los compartimos ni los reutilizamos sin autorización, y cada capa puede tener control de acceso. Las cuentas de almacenamiento y el dominio quedan de tu lado."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Hace falta un servidor o una base de datos?",
+            "acceptedAnswer": {"@type": "Answer", "text": "No. Publicamos archivos abiertos en almacenamiento de objetos. Se consultan directamente, sin tile server ni base de datos que administrar."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Con qué herramientas podemos usar los datos?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Con las que ya usa tu equipo: Python, DuckDB, QGIS, R o cualquier SIG. También con nuestro visor en piloto y un asistente que cita sus fuentes."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo verificamos de dónde salió cada dato?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Cada valor se puede rastrear hasta su archivo, hoja y fila original. Cada tabla tiene manifest, versión y hash, y el catálogo STAC describe qué hay, dónde está y con qué licencia."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Están certificados en ISO o en seguridad?",
+            "acceptedAnswer": {"@type": "Answer", "text": "No. Usamos STAC, ISO 19115-1, ISO 19157-1 y OWASP ASVS como referencias de diseño. No afirmamos conformidad certificada sin una evaluación documentada."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Por dónde empezamos?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Con un conjunto acotado de tus datos y un problema concreto. El diagnóstico dice qué hay, en qué formato y qué falta. Si tu caso no encaja, te lo decimos antes de empezar."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿El asistente de IA puede inventar una respuesta?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Toda respuesta cita sus fuentes y se puede rastrear hasta el registro original. Cuando un dato requiere revisión, lo indicamos en vez de atribuirle una certeza que no tiene."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto cuesta?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Cada proyecto se cotiza por alcance y entregables. No cobramos por el dato público. El piloto se define antes de empezar, para que sepas qué recibes y qué se mide."}
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 <a class="skip" href="#contenido">Saltar al contenido</a>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Kipu360, inicio">
+    <a class="brand" href="index.html" aria-label="Kipu360, inicio" aria-current="page">
       <img src="assets/img/brand/logo-horizontal.svg" alt="Kipu360" width="168" height="42">
     </a>
     <nav class="nav" aria-label="Principal">
@@ -50,6 +129,7 @@
       <a class="button" href="mailto:contacto@kipu360.com">Cuéntanos tu caso</a>
       <a class="button ghost" href="como-trabajamos.html">Cómo trabajamos</a>
     </div>
+    <p class="hero-note">Más de una década trabajando con información ambiental y geoespacial en minería, sector público y academia.</p>
   </section>
 
   <section class="section mist">
@@ -59,7 +139,7 @@
         <h2>Cada dato debe poder responder de dónde vino y qué se hizo con él.</h2>
       </div>
       <div class="prose">
-        <p>Para diseñar un proyecto, preparar un informe o sustentar una decisión, los equipos reúnen información de instituciones, gobiernos locales y regionales, universidades y empresas. Conciliar fuentes distintas y repetir el trabajo en cada proyecto consume tiempo, y se vuelve difícil comprobar qué respalda cada resultado.</p>
+        <p>Para diseñar un proyecto, preparar un informe o sustentar una decisión, los equipos reúnen información de instituciones, gobiernos locales y regionales, universidades y empresas. Conciliar fuentes distintas y repetir el trabajo en cada proyecto consume tiempo. Y cuando alguien pregunta por una cifra, no siempre hay un archivo que la respalde.</p>
         <p>No falta información. Falta infraestructura para ordenarla, conectarla y confiar en ella.</p>
       </div>
     </div>
@@ -72,15 +152,15 @@
       <div class="cards">
         <article class="card">
           <h3>Integrar y documentar</h3>
-          <p>Integramos fuentes públicas y privadas en catálogos documentados y versionados. Cada valor se puede rastrear hasta su archivo, hoja y fila original. Cada corrección queda registrada.</p>
+          <p>Reunimos fuentes públicas y privadas en un catálogo documentado y versionado. Cada valor se puede rastrear hasta su archivo, hoja y fila original. Cada corrección queda registrada.</p>
         </article>
         <article class="card">
           <h3>Publicar sin servidores</h3>
-          <p>Publicamos en formatos abiertos que se consultan directamente, sin servidores dedicados. El cliente conserva el control de sus datos privados y los públicos quedan disponibles.</p>
+          <p>Publicamos Parquet, GeoParquet, PMTiles y COG en almacenamiento de objetos, con catálogo STAC. Se consultan directamente, sin servidores dedicados que mantener.</p>
         </article>
         <article class="card">
           <h3>Consultar y analizar</h3>
-          <p>Las organizaciones usan los datos con sus propias herramientas, con un asistente que cita sus fuentes o con sus propios agentes de inteligencia artificial.</p>
+          <p>Tu equipo usa los datos en Python, DuckDB, QGIS o R. También con nuestro visor en piloto y un asistente que responde citando el registro de origen.</p>
         </article>
       </div>
     </div>
@@ -89,25 +169,41 @@
   <section class="section mist">
     <div class="wrap split">
       <div>
+        <p class="kicker">Compromisos</p>
+        <h2>Lo que puedes exigirnos en cada entrega.</h2>
+      </div>
+      <ul class="checklist">
+        <li><strong>Origen rastreable.</strong> Cada valor llega hasta su archivo, hoja y fila.</li>
+        <li><strong>Versión y manifiesto.</strong> Cada tabla publicada tiene versión y hash.</li>
+        <li><strong>Fuente y licencia.</strong> Cada capa declara de dónde viene y con qué licencia se usa.</li>
+        <li><strong>Permiso antes de publicar.</strong> Nada privado se publica sin autorización del cliente.</li>
+        <li><strong>Incertidumbre visible.</strong> Si un dato requiere revisión, lo indicamos.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div>
         <p class="kicker">El recorrido del dato</p>
         <h2>Fuente, transformación, resultado.</h2>
         <p class="lead spaced-sm">El mismo camino para cada conjunto. Entra el documento, sale un dato con origen.</p>
       </div>
       <figure class="diagram">
-        <div class="flow">
-          <div class="flow-step">
+        <ol class="flow">
+          <li class="flow-step">
             <span class="flow-label">Fuente</span>
             <p>Estudios, hojas de cálculo, capas y portales</p>
-          </div>
-          <div class="flow-step">
+          </li>
+          <li class="flow-step">
             <span class="flow-label">Transformación</span>
             <p>OCR solo si hace falta, limpieza y Parquet</p>
-          </div>
-          <div class="flow-step">
+          </li>
+          <li class="flow-step">
             <span class="flow-label">Resultado</span>
             <p>Catálogo STAC, visor y consulta</p>
-          </div>
-        </div>
+          </li>
+        </ol>
         <figcaption>Cada registro conserva el vínculo con su archivo de origen. Si un dato requiere revisión, lo indicamos en vez de atribuirle una certeza que no tiene.</figcaption>
       </figure>
     </div>
@@ -121,22 +217,71 @@
         <li>Cada dato conserva el vínculo con su fuente.</li>
         <li>Cada corrección queda registrada.</li>
         <li>Los datos privados siguen siendo del cliente.</li>
-        <li>El código base y los catálogos públicos son abiertos.</li>
-        <li>Cobramos por el servicio y la integración, no por el dato público.</li>
+        <li>Cobramos por el servicio, no por el dato público.</li>
       </ul>
+      <p class="spaced"><a href="nosotros.html">Cómo tomamos decisiones</a></p>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section mist">
     <div class="wrap">
       <p class="kicker">Para quién</p>
       <h2>Para quien produce, gestiona o usa información del territorio.</h2>
       <ul class="audiences">
-        <li><strong>Instituciones públicas</strong><span>Gobiernos locales y regionales que publican datos y responden por ellos.</span></li>
-        <li><strong>Empresas y consultoras</strong><span>Que sostienen compromisos ambientales y auditorías.</span></li>
-        <li><strong>Universidades y centros de investigación</strong><span>Que producen datos y quieren reutilizarlos.</span></li>
-        <li><strong>Profesionales y equipos técnicos</strong><span>Que preparan estudios y necesitan trazabilidad.</span></li>
+        <li><strong>Instituciones públicas</strong><span>Publican datos que la ciudadanía puede encontrar y verificar.</span></li>
+        <li><strong>Minería y energía</strong><span>Sostienen compromisos ambientales y auditorías con evidencia ordenada.</span></li>
+        <li><strong>Agua y saneamiento</strong><span>Relacionan monitoreo, cuencas y población en una misma base.</span></li>
+        <li><strong>Universidades y centros de investigación</strong><span>Sus datos quedan citables y reutilizables, con licencia clara.</span></li>
+        <li><strong>Consultoras ambientales</strong><span>Responden requerimientos sin reconstruir el historial.</span></li>
+        <li><strong>Equipos técnicos</strong><span>Encuentran la fuente y su procedencia sin rehacer el trabajo anterior.</span></li>
       </ul>
+    </div>
+  </section>
+
+  <section class="section" id="preguntas">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Preguntas frecuentes</p>
+        <h2>Lo que suelen preguntarnos antes de empezar.</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>¿Los datos públicos son gratuitos?</summary>
+          <p>Sí. Los datos públicos permanecen abiertos y gratuitos. Cobramos por diseñar la infraestructura, integrar las fuentes, desarrollar herramientas y dar soporte, no por el dato público.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa con nuestros datos privados?</summary>
+          <p>Siguen siendo del cliente. No los compartimos ni los reutilizamos sin autorización, y cada capa puede tener control de acceso. Las cuentas de almacenamiento y el dominio quedan de tu lado.</p>
+        </details>
+        <details>
+          <summary>¿Hace falta un servidor o una base de datos?</summary>
+          <p>No. Publicamos archivos abiertos en almacenamiento de objetos. Se consultan directamente, sin tile server ni base de datos que administrar.</p>
+        </details>
+        <details>
+          <summary>¿Con qué herramientas podemos usar los datos?</summary>
+          <p>Con las que ya usa tu equipo: Python, DuckDB, QGIS, R o cualquier SIG. También con nuestro visor en piloto y un asistente que cita sus fuentes.</p>
+        </details>
+        <details>
+          <summary>¿Cómo verificamos de dónde salió cada dato?</summary>
+          <p>Cada valor se puede rastrear hasta su archivo, hoja y fila original. Cada tabla tiene manifest, versión y hash, y el catálogo STAC describe qué hay, dónde está y con qué licencia.</p>
+        </details>
+        <details>
+          <summary>¿Están certificados en ISO o en seguridad?</summary>
+          <p>No. Usamos STAC, ISO 19115-1, ISO 19157-1 y OWASP ASVS como referencias de diseño. No afirmamos conformidad certificada sin una evaluación documentada.</p>
+        </details>
+        <details>
+          <summary>¿Por dónde empezamos?</summary>
+          <p>Con un conjunto acotado de tus datos y un problema concreto. El diagnóstico dice qué hay, en qué formato y qué falta. Si tu caso no encaja, te lo decimos antes de empezar.</p>
+        </details>
+        <details>
+          <summary>¿El asistente de IA puede inventar una respuesta?</summary>
+          <p>Toda respuesta cita sus fuentes y se puede rastrear hasta el registro original. Cuando un dato requiere revisión, lo indicamos en vez de atribuirle una certeza que no tiene.</p>
+        </details>
+        <details>
+          <summary>¿Cuánto cuesta?</summary>
+          <p>Cada proyecto se cotiza por alcance y entregables. No cobramos por el dato público. El piloto se define antes de empezar, para que sepas qué recibes y qué se mide.</p>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -147,7 +292,7 @@
         <h2>Construimos infraestructura de datos desde el Perú.</h2>
       </div>
       <div class="prose">
-        <p>Kipu360 es una empresa peruana de tecnología. Nace de más de una década de trabajo con información ambiental y geoespacial en el sector minero, el Estado y la academia. Conocemos el problema desde dentro: los datos existen, pero llegan tarde, incompletos y sin rastro de quién los tocó.</p>
+        <p>Kipu360 es una empresa peruana de tecnología. Nace de más de una década de trabajo con información ambiental y geoespacial en minería, sector público y academia. Conocemos el problema desde dentro: los datos existen, pero llegan tarde, incompletos y sin rastro de quién los tocó.</p>
         <p><a href="nosotros.html">Quiénes somos y cómo pensamos</a></p>
       </div>
     </div>
@@ -158,8 +303,9 @@
       <div>
         <p class="kicker">Contacto</p>
         <h2>Cuéntanos qué datos tienes y qué necesitas hacer con ellos.</h2>
+        <p class="lead spaced-sm">Te respondemos con una primera lectura del caso: qué se puede ordenar, qué formato conviene y qué paso dar primero. Si encaja, te proponemos un piloto acotado.</p>
       </div>
-      <a class="button" href="mailto:contacto@kipu360.com">contacto@kipu360.com</a>
+      <a class="button" href="mailto:contacto@kipu360.com">Escríbenos</a>
     </div>
   </section>
 
@@ -177,6 +323,7 @@
       </nav>
     </div>
     <p>Información ambiental y geoespacial, con origen verificable.</p>
+    <p class="footer-note">Sitio estático, sin cookies ni rastreadores. Actualizado: octubre 2026.</p>
     <p>© 2026 Kipu360.</p>
   </div>
 </footer>

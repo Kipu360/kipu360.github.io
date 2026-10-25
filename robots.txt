@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /404.html
 
 Sitemap: https://kipu360.github.io/sitemap.xml

@@ -92,6 +92,11 @@ p + p { margin-top: 1rem; }
     padding-top: 0.75rem;
     border-top: 1px solid rgba(18, 52, 58, 0.12);
   }
+  .nav .button { display: none; }
+}
+
+@media (max-width: 30rem) {
+  h1 { font-size: clamp(2.1rem, 9vw, 2.6rem); }
 }
 
 /* Header */
@@ -233,7 +238,7 @@ p + p { margin-top: 1rem; }
 
 /* Diagram */
 .diagram { margin-top: 2.5rem; }
-.flow { display: grid; gap: 1rem; }
+.flow { list-style: none; padding: 0; display: grid; gap: 1rem; }
 .flow-step {
   background: var(--kipu-cream);
   border: 1px solid rgba(18, 52, 58, 0.18);
@@ -314,6 +319,68 @@ tbody th { font-weight: 600; }
 .site-footer nav { display: flex; flex-wrap: wrap; gap: 1.25rem; }
 .site-footer a { color: var(--kipu-slate); text-decoration: none; }
 .site-footer a:hover { color: var(--kipu-earth); }
+
+/* Hero note */
+.hero-note {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--kipu-slate);
+  max-width: 55ch;
+}
+
+/* Checklists */
+.checklist { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 0.9rem; }
+.checklist li { position: relative; padding-left: 1.5rem; color: var(--kipu-slate); }
+.checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--kipu-earth);
+  border-radius: 50%;
+}
+.checklist strong { color: var(--kipu-ink); font-weight: 600; }
+
+/* Two-column text */
+.two-col { display: grid; gap: 2rem; margin-top: 2rem; }
+@media (min-width: 48rem) { .two-col { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+.two-col h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+.two-col p { color: var(--kipu-slate); }
+
+/* Deliverables inside steps */
+.deliverable { margin-top: 0.7rem; font-size: 0.92rem; color: var(--kipu-ink); }
+.deliverable strong { color: var(--kipu-earth); }
+
+/* FAQ */
+.faq { margin-top: 2.5rem; border-top: 1px solid rgba(18, 52, 58, 0.18); }
+.faq details { border-bottom: 1px solid rgba(18, 52, 58, 0.18); }
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 0.5rem 1.1rem 0;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--kipu-earth); font-weight: 700; font-size: 1.25rem; line-height: 1; }
+.faq details[open] summary::after { content: "−"; }
+.faq p { padding-bottom: 1.1rem; color: var(--kipu-slate); max-width: 65ch; }
+
+/* Team */
+.team { display: grid; gap: 1.5rem; margin-top: 2.5rem; }
+@media (min-width: 48rem) { .team { grid-template-columns: repeat(3, 1fr); } }
+.team article { border-top: 2px solid var(--kipu-earth); padding-top: 1rem; }
+.team h3 { font-size: 1.15rem; margin-bottom: 0.35rem; }
+.team p { color: var(--kipu-slate); font-size: 0.98rem; }
+.team-note { margin-top: 1.5rem; font-size: 0.9rem; color: var(--kipu-slate); }
+
+/* Footer note */
+.footer-note { font-size: 0.85rem; }
 
 /* 404 */
 .center-page { min-height: 60vh; display: grid; place-items: center; text-align: center; }

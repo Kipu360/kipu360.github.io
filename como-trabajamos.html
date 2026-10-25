@@ -4,17 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cómo trabajamos | Kipu360</title>
-  <meta name="description" content="Del documento disperso al dato publicado: diagnóstico, orden, publicación y consulta. Formatos abiertos y estado de cada función.">
+  <meta name="description" content="Del documento disperso al dato publicado: diagnóstico, orden y linaje, publicación en Parquet, GeoParquet, PMTiles, COG y catálogo STAC, y consulta con fuentes citadas.">
   <link rel="canonical" href="https://kipu360.github.io/como-trabajamos.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Kipu360">
+  <meta property="og:locale" content="es_PE">
   <meta property="og:title" content="Cómo trabajamos | Kipu360">
-  <meta property="og:description" content="Del documento disperso al dato publicado, con procedencia verificable.">
+  <meta property="og:description" content="Del documento disperso al dato publicado, con procedencia verificable y entregables en cada etapa.">
   <meta property="og:url" content="https://kipu360.github.io/como-trabajamos.html">
   <meta property="og:image" content="https://kipu360.github.io/assets/img/brand/social-card-1200x630.png">
+  <meta property="og:image:alt" content="Kipu360: cómo trabajamos">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kipu360.github.io/assets/img/brand/social-card-1200x630.png">
   <meta name="theme-color" content="#12343a">
   <link rel="icon" href="assets/img/brand/favicon-32.png" sizes="32x32">
   <link rel="icon" href="assets/img/brand/favicon-64.png" sizes="64x64">
@@ -23,6 +26,62 @@
   <link rel="preload" href="assets/fonts/manrope-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://kipu360.github.io/como-trabajamos.html#webpage",
+        "url": "https://kipu360.github.io/como-trabajamos.html",
+        "name": "Cómo trabajamos | Kipu360",
+        "inLanguage": "es-PE",
+        "isPartOf": {"@id": "https://kipu360.github.io/#website"}
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://kipu360.github.io/como-trabajamos.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Qué pasa si las fuentes están en PDF escaneado?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Aplicamos OCR solo a las páginas que lo necesitan y dejamos el texto y la imagen de la página como respaldo. Si el OCR no es confiable, se marca para revisión."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué pasa si los datos están incompletos o mal ubicados?",
+            "acceptedAnswer": {"@type": "Answer", "text": "El diagnóstico los hace visibles. No inventamos valores faltantes: los marcamos y explicamos el efecto en la consulta."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo se controla el acceso a datos privados?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Cada capa puede tener control de acceso. Las cuentas de almacenamiento y el dominio quedan del lado del cliente; las credenciales se entregan por un canal aparte."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿El visor requiere instalar algo?",
+            "acceptedAnswer": {"@type": "Answer", "text": "No. Es una página estática que se abre en el navegador. Los datos se leen desde archivos abiertos."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Pueden usar sus propias herramientas y agentes?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Sí. Los formatos son abiertos y el catálogo STAC describe dónde está cada cosa. También ofrecemos acceso MCP para agentes."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué pasa si el caso no encaja?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Lo decimos antes de empezar. No aceptamos un proyecto que no podamos sostener con el equipo y el alcance disponibles."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto demora un proyecto?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Depende de las fuentes y del alcance. El piloto se define antes de empezar, con entregables y criterios de aceptación."}
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -57,24 +116,59 @@
         <li>
           <span class="step-n">01</span>
           <h3>Diagnóstico</h3>
-          <p>Qué hay, en qué formato, con qué calidad y qué falta. Inventario y prioridades.</p>
+          <p>Qué hay, en qué formato, con qué calidad y qué falta.</p>
+          <p class="deliverable"><strong>Entregable:</strong> inventario de fuentes, vacíos y prioridades.</p>
         </li>
         <li>
           <span class="step-n">02</span>
           <h3>Orden y documentación</h3>
           <p>Limpieza, normalización y linaje. Cada registro apunta a su archivo de origen.</p>
+          <p class="deliverable"><strong>Entregable:</strong> tablas ordenadas, diccionario de datos y registro de correcciones.</p>
         </li>
         <li>
           <span class="step-n">03</span>
           <h3>Publicación</h3>
           <p>Parquet, GeoParquet, PMTiles y COG, con catálogo STAC y control de acceso si hace falta.</p>
+          <p class="deliverable"><strong>Entregable:</strong> archivos publicados, manifest con versión y catálogo navegable.</p>
         </li>
         <li>
           <span class="step-n">04</span>
           <h3>Consulta y análisis</h3>
-          <p>Visor, series y asistente. La respuesta siempre se puede rastrear hasta el registro.</p>
+          <p>Visor, series, asistente y acceso MCP para agentes. La respuesta se puede rastrear hasta el registro.</p>
+          <p class="deliverable"><strong>Entregable:</strong> visor o consulta funcionando y guía de uso.</p>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Requisitos</p>
+        <h2>Lo que necesitamos de tu lado.</h2>
+      </div>
+      <ul class="checklist">
+        <li><strong>Una pregunta prioritaria.</strong> Algo que hoy no puedes responder con la información que tienes.</li>
+        <li><strong>Acceso a las fuentes.</strong> Los archivos, portales o personas que conocen los datos.</li>
+        <li><strong>Una persona responsable.</strong> Alguien que valide los resultados y decida qué se publica.</li>
+        <li><strong>Permiso para publicar.</strong> Autorización explícita para los datos que saldrán abiertos.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section mist">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Criterios</p>
+        <h2>Cuándo consideramos que una entrega está terminada.</h2>
+      </div>
+      <ul class="checklist">
+        <li>Cada valor se rastrea hasta su archivo, hoja y fila.</li>
+        <li>Cada tabla tiene manifest, versión y hash.</li>
+        <li>Cada capa tiene fuente y licencia declaradas.</li>
+        <li>El visor funciona sin servidor dedicado.</li>
+        <li>Cada respuesta del asistente cita el registro.</li>
+      </ul>
     </div>
   </section>
 
@@ -112,7 +206,7 @@
       <div class="prose">
         <p><strong>Del cliente:</strong> los datos, las cuentas de almacenamiento, el dominio y la decisión sobre quién puede ver cada capa.</p>
         <p><strong>Nuestro:</strong> el orden, la documentación del linaje, la publicación, el visor y el soporte. La metodología es pública y versionada.</p>
-        <p><strong>Cómo se cobra:</strong> por diseñar e implementar la infraestructura, por las herramientas que cada organización necesite y por operar o mantener lo que lo requiera. Los datos públicos permanecen abiertos y gratuitos.</p>
+        <p><strong>Cómo se cobra:</strong> por proyecto de implementación, por las herramientas que cada organización necesite y por operar o mantener lo que lo requiera. También por suscripción para catálogos privados, asistente y acceso MCP. Los datos públicos permanecen abiertos y gratuitos.</p>
         <p>El hosting queda en almacenamiento de objetos. No hay servidores que mantener ni bases de datos que administrar para servir los datos.</p>
       </div>
     </div>
@@ -132,12 +226,68 @@
             <tr><th scope="row">Ordenar y documentar datos</th><td><span class="state available">Disponible</span></td></tr>
             <tr><th scope="row">Publicar catálogo STAC y capas</th><td><span class="state available">Disponible</span></td></tr>
             <tr><th scope="row">Visor web de datos</th><td><span class="state pilot">Piloto</span></td></tr>
-            <tr><th scope="row">Asistente de IA sobre los datos</th><td><span class="state defined">En definición</span></td></tr>
+            <tr><th scope="row">Asistente de IA sobre los datos</th><td><span class="state pilot">Piloto</span></td></tr>
+            <tr><th scope="row">Acceso MCP para agentes</th><td><span class="state defined">En definición</span></td></tr>
             <tr><th scope="row">Perfil abierto de monitoreo ambiental</th><td><span class="state defined">En definición</span></td></tr>
           </tbody>
         </table>
       </div>
       <p class="lead spaced">Si tu caso no encaja en lo disponible, lo decimos antes de empezar.</p>
+    </div>
+  </section>
+
+  <section class="section mist">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Límites</p>
+        <h2>Lo que no hacemos.</h2>
+      </div>
+      <div class="prose">
+        <p><strong>No vendemos datos.</strong> Ordenamos los tuyos y los dejamos listos para usarse.</p>
+        <p><strong>No certificamos conformidad con ISO ni OWASP.</strong> Usamos esas normas como referencia de diseño.</p>
+        <p><strong>No reemplazamos laboratorios, consultorías especializadas ni la revisión de un profesional responsable.</strong></p>
+        <p><strong>No publicamos datos sin licencia o autorización.</strong></p>
+        <p><strong>No prometemos respuestas de IA que no citen su fuente.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="preguntas">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Preguntas frecuentes</p>
+        <h2>Dudas que aparecen antes de un piloto.</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>¿Qué pasa si las fuentes están en PDF escaneado?</summary>
+          <p>Aplicamos OCR solo a las páginas que lo necesitan y dejamos el texto y la imagen de la página como respaldo. Si el OCR no es confiable, se marca para revisión.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa si los datos están incompletos o mal ubicados?</summary>
+          <p>El diagnóstico los hace visibles. No inventamos valores faltantes: los marcamos y explicamos el efecto en la consulta.</p>
+        </details>
+        <details>
+          <summary>¿Cómo se controla el acceso a datos privados?</summary>
+          <p>Cada capa puede tener control de acceso. Las cuentas de almacenamiento y el dominio quedan del lado del cliente; las credenciales se entregan por un canal aparte.</p>
+        </details>
+        <details>
+          <summary>¿El visor requiere instalar algo?</summary>
+          <p>No. Es una página estática que se abre en el navegador. Los datos se leen desde archivos abiertos.</p>
+        </details>
+        <details>
+          <summary>¿Pueden usar sus propias herramientas y agentes?</summary>
+          <p>Sí. Los formatos son abiertos y el catálogo STAC describe dónde está cada cosa. También ofrecemos acceso MCP para agentes.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa si el caso no encaja?</summary>
+          <p>Lo decimos antes de empezar. No aceptamos un proyecto que no podamos sostener con el equipo y el alcance disponibles.</p>
+        </details>
+        <details>
+          <summary>¿Cuánto demora un proyecto?</summary>
+          <p>Depende de las fuentes y del alcance. El piloto se define antes de empezar, con entregables y criterios de aceptación.</p>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -168,6 +318,7 @@
       </nav>
     </div>
     <p>Información ambiental y geoespacial, con origen verificable.</p>
+    <p class="footer-note">Sitio estático, sin cookies ni rastreadores. Actualizado: octubre 2026.</p>
     <p>© 2026 Kipu360.</p>
   </div>
 </footer>
