@@ -379,9 +379,6 @@ tbody th { font-weight: 600; }
 .team p { color: var(--kipu-slate); font-size: 0.98rem; }
 .team-note { margin-top: 1.5rem; font-size: 0.9rem; color: var(--kipu-slate); }
 
-/* Footer note */
-.footer-note { font-size: 0.85rem; }
-
 /* 404 */
 .center-page { min-height: 60vh; display: grid; place-items: center; text-align: center; }
 .center-page p { margin-top: 1rem; color: var(--kipu-slate); }
