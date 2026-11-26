@@ -17,6 +17,8 @@
   --blanco: #FFFFFF;      /* tarjetas */
   --linea: color-mix(in srgb, var(--negro) 14%, transparent);
   --texto-suave: color-mix(in srgb, var(--negro) 88%, var(--piel));
+  --fondo-portada: #FCFCFA; /* portada clara, como portolan-sdi.org */
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   /* Tipografia */
   --font-titulo: "Space Grotesk", system-ui, sans-serif;

@@ -163,7 +163,7 @@ const iconos = [
 
 <style>
   /* Portada */
-  .portada { position: relative; overflow: hidden; background: var(--azul-oscuro); color: var(--blanco); padding-block: var(--s-5); }
+  .portada { position: relative; overflow: hidden; background: var(--fondo-portada); color: var(--negro); padding-block: var(--s-5); }
   .portada__fig { margin: 0; justify-self: end; text-align: center; }
   .portada__fig figcaption { margin-top: var(--s-1); font-family: var(--font-titulo); font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cian); }
   .encabezado--ancho { max-width: none; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); align-items: end; }
@@ -173,10 +173,8 @@ const iconos = [
   .nota-caja strong { font-family: var(--font-titulo); color: var(--azul); }
   .nota-caja p { margin: 0; font-size: 1rem; max-width: none; }
   .portada__grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--s-5); align-items: center; }
-  .portada h1 { color: var(--blanco); font-size: clamp(2.1rem, 1.4rem + 2.6vw, 3.3rem); max-width: 21ch; }
-  .portada .lead { color: var(--blanco); opacity: 0.92; max-width: 50ch; }
-  .portada .boton { background: var(--cian); border-color: var(--cian); color: var(--negro); }
-  .portada .boton:hover { background: var(--blanco); border-color: var(--blanco); }
+  .portada h1 { color: var(--azul-oscuro); letter-spacing: -0.02em; font-size: clamp(2.1rem, 1.4rem + 2.6vw, 3.3rem); max-width: 21ch; }
+  .portada .lead { color: var(--negro); max-width: 50ch; }
   .portada .boton--borde { background: transparent; color: var(--blanco); border-color: rgb(255 255 255 / 0.7); }
   .portada .boton--borde:hover { background: var(--blanco); color: var(--azul-oscuro); }
   .portada__mapa { width: min(100%, 380px); height: auto; filter: drop-shadow(0 30px 40px rgb(0 0 0 / 0.35)); }

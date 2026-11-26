@@ -1,12 +1,12 @@
 ---
-// Globo de puntos que gira, se acerca al Perú y a las estaciones reales de Antapaccay, y
-// abre la estructura de ese catálogo (repo Kipu360/antapaccay-2022). Idea tomada de la
-// portada de portolan-sdi.org. Los puntos se calculan en la build: el navegador solo dibuja.
+// Globo de puntos que gira, se acerca al Perú y a Camisea (Cusco), y abre un ejemplo de la
+// estructura de catálogo que proponemos. Es ilustrativo: no hay datos de clientes. Ubicación de
+// los campos de Camisea según en.wikipedia.org/wiki/Camisea_Gas_Project (-11.8387, -72.9503).
+// Idea tomada de la portada de portolan-sdi.org. Los puntos se calculan en la build.
 import { geoContains } from "d3-geo";
 import { feature } from "topojson-client";
 import land110 from "world-atlas/land-110m.json";
 import countries50 from "world-atlas/countries-50m.json";
-import estaciones from "../data/estaciones-antapaccay.geojson?raw";
 
 const tierra = feature(land110, land110.objects.land);
 const peru = feature(countries50, countries50.objects.countries).features.find((f) => f.id === "604");
@@ -27,38 +27,52 @@ for (let lat = -18.5; lat <= 0.2; lat += 0.42) {
     if (geoContains(peru, [lon, lat])) puntosPeru.push([r2(lon), r2(lat)]);
   }
 }
-const puntosEstaciones = JSON.parse(estaciones).features.map((f) => f.geometry.coordinates.map((c) => Math.round(c * 1e4) / 1e4));
-const datos = JSON.stringify({ mundo, peru: puntosPeru, estaciones: puntosEstaciones });
+const datos = JSON.stringify({ mundo, peru: puntosPeru });
 
 const arbol = [
-  { n: "antapaccay-2022/", t: "dir", d: 0 },
-  { n: "catalog.json", t: "stac", d: 1, nota: "STAC" },
+  { n: "camisea-ejemplo/", t: "dir", d: 0 },
+  { n: "catalog.json", t: "stac", d: 1, f: "STAC" },
   { n: "catalogo/", t: "dir", d: 1 },
-  { n: "collection.json", t: "stac", d: 2 },
+  { n: "collection.json", t: "stac", d: 2, f: "STAC" },
   { n: "README.md", t: "doc", d: 2 },
   { n: "AGENTS.md", t: "doc", d: 2, nota: "para IA" },
-  { n: "tablas/", t: "dir", d: 1 },
-  { n: "results.parquet", t: "pq", d: 2 },
-  { n: "stations.parquet", t: "pq", d: 2 },
-  { n: "source_files.parquet", t: "pq", d: 2 },
-  { n: "corrections.parquet", t: "pq", d: 2 },
-  { n: "y 8 tablas más", t: "mas", d: 2 },
+  { n: "tablas/", t: "dir", d: 1, f: "Parquet" },
+  { n: "estaciones.parquet", t: "pq", d: 2 },
+  { n: "muestreos.parquet", t: "pq", d: 2 },
+  { n: "resultados.parquet", t: "pq", d: 2 },
+  { n: "parametros.parquet", t: "pq", d: 2 },
   { n: "fuentes.json", t: "doc", d: 1 },
   { n: "validacion.json", t: "doc", d: 1 },
 ];
+// Conectores del árbol (├── └── │), calculados en la build.
+const esUltimo = (i) => {
+  for (let j = i + 1; j < arbol.length; j++) {
+    if (arbol[j].d < arbol[i].d) return true;
+    if (arbol[j].d === arbol[i].d) return false;
+  }
+  return true;
+};
+const filas = arbol.map((a, i) => {
+  let pre = "";
+  for (let nivel = 1; nivel < a.d; nivel++) {
+    let k = i; while (arbol[k].d > nivel) k--;
+    pre += esUltimo(k) ? "    " : "│   ";
+  }
+  if (a.d > 0) pre += esUltimo(i) ? "└── " : "├── ";
+  return { ...a, pre, formato: a.f };
+});
 ---
 <div class="globo" data-globo>
   <canvas class="globo__lienzo" width="560" height="560" aria-hidden="true"></canvas>
   <p class="globo__rotulo" data-rotulo aria-live="off"></p>
-  <div class="globo__arbol" data-arbol aria-label="Ejemplo de catálogo Kipu360: antapaccay-2022">
+  <div class="globo__arbol" data-arbol aria-label="Ejemplo ilustrativo de catálogo Kipu360">
     <p class="globo__ruta">kipu360.github.io</p>
     <ul>
-      {arbol.map((a) => (
-        <li class={`d${a.d} t-${a.t}`}><span class="icono"></span>{a.n}{a.nota && <em>{a.nota}</em>}</li>
+      {filas.map((a) => (
+        <li class={`t-${a.t}`}><span class="pre">{a.pre}</span><span class="nombre">{a.n}</span>{a.nota && <em>{a.nota}</em>}{a.formato && <b>{a.formato}</b>}</li>
       ))}
     </ul>
-    <p class="globo__pie">504 estaciones y 12 tablas Parquet</p>
-    <p class="globo__leyenda"><span class="t-stac"><span class="icono"></span>STAC</span><span class="t-pq"><span class="icono"></span>Parquet</span><span class="t-doc"><span class="icono"></span>documentos</span></p>
+    <p class="globo__pie">Ejemplo ilustrativo: catálogo STAC y tablas Parquet</p>
   </div>
   <script type="application/json" data-puntos set:html={datos}></script>
 </div>
@@ -66,29 +80,22 @@ const arbol = [
 <style>
   .globo { position: relative; width: min(100%, 520px); aspect-ratio: 1; justify-self: end; }
   .globo__lienzo { width: 100%; height: 100%; display: block; }
-  .globo__rotulo { position: absolute; left: 50%; bottom: -3%; transform: translateX(-50%); margin: 0; white-space: nowrap; font-family: var(--font-titulo); font-weight: 700; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cian); transition: opacity 0.6s ease; }
-  .globo__arbol { position: absolute; right: 0; top: 50%; translate: 0 -50%; width: 62%; padding: 14px 16px 12px; border-radius: 16px; background: var(--blanco); color: var(--negro); box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.6); overflow: hidden; opacity: 0; transform: translateY(14px) scale(0.98); transition: opacity 0.7s ease, transform 0.7s ease; pointer-events: none; }
-  .globo.abierto .globo__arbol { opacity: 1; transform: none; }
-  .globo__ruta { white-space: nowrap; margin: 0 0 8px; font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: 0.78rem; color: var(--azul); }
-  .globo__arbol ul { list-style: none; margin: 0; padding: 0; font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: 0.76rem; line-height: 1.7; }
-  .globo__arbol li { display: flex; align-items: center; gap: 7px; white-space: nowrap; opacity: 0; transform: translateX(-6px); transition: opacity 0.35s ease, transform 0.35s ease; }
-  .globo.abierto .globo__arbol li { opacity: 1; transform: none; }
-  .globo__arbol li.d1 { padding-left: 16px; }
-  .globo__arbol li.d2 { padding-left: 32px; }
-  .globo__arbol em { font-style: normal; font-family: var(--font-texto); font-size: 0.7rem; color: var(--texto-suave); margin-left: auto; padding-left: 10px; }
-  .icono { width: 10px; height: 10px; border-radius: 2px; flex: none; background: var(--azul-oscuro); }
-  .t-dir .icono { background: none; border: 2px solid var(--azul); border-radius: 3px; }
-  .t-dir { font-weight: 700; color: var(--azul-oscuro); }
-  .t-stac .icono { background: var(--azul); }
-  .t-pq .icono { background: var(--verde); }
-  .t-doc .icono { background: color-mix(in srgb, var(--negro) 35%, transparent); }
-  .t-mas { color: var(--texto-suave); font-style: italic; }
-  .t-mas .icono { background: none; }
+  .globo__rotulo { position: absolute; left: 50%; bottom: -3%; transform: translateX(-50%); margin: 0; white-space: nowrap; font-family: var(--font-titulo); font-weight: 700; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--azul-oscuro); transition: opacity 0.6s ease; }
+  .globo__arbol { position: absolute; right: 0; top: 50%; translate: 0 -50%; width: 60%; padding: 14px 16px 12px; border-radius: 0; background: var(--fondo-portada); border: 1px solid var(--linea); color: var(--negro); overflow: hidden; opacity: 0; clip-path: inset(0 0 100% 0); transition: opacity 0.5s ease, clip-path 1.1s ease; pointer-events: none; }
+  .globo.abierto .globo__arbol { opacity: 1; clip-path: inset(0 0 0 0); }
+  .globo__ruta { white-space: nowrap; margin: 0 0 8px; font-family: var(--font-mono); font-size: 0.72rem; color: #74766a; }
+  .globo__arbol ul { list-style: none; margin: 0; padding: 0; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.4; }
+  .globo__arbol li { display: flex; align-items: baseline; white-space: pre; opacity: 0; transition: opacity 0.35s ease; }
+  .globo.abierto .globo__arbol li { opacity: 1; }
+  .globo__arbol .pre { color: #74766a; }
+  .globo__arbol .nombre { color: #3d3f33; }
+  .t-dir .nombre, .t-pq .nombre, .t-stac .nombre { font-weight: 600; color: #16170f; }
+  .globo__arbol em { font-style: normal; font-size: 0.68rem; color: #74766a; margin-left: auto; padding-left: 10px; }
+  .globo__arbol b { font-weight: 500; font-size: 0.68rem; color: var(--azul); margin-left: auto; padding-left: 10px; }
+  .globo__arbol em + b { margin-left: 8px; }
   .globo.abierto .globo__rotulo { opacity: 0; }
-  .globo__rotulo.mina { color: color-mix(in srgb, var(--naranja) 70%, var(--blanco)); }
-  .globo__leyenda { display: flex; flex-wrap: wrap; gap: 4px 9px; margin: 6px 0 0; font-size: 0.66rem; color: var(--texto-suave); }
-  .globo__leyenda > span { display: inline-flex; align-items: center; gap: 5px; }
-  .globo__pie { margin: 10px 0 0; padding-top: 8px; border-top: 1px solid var(--linea); font-size: 0.78rem; color: var(--texto-suave); }
+  .globo__rotulo.mina { color: color-mix(in srgb, var(--naranja) 75%, var(--negro)); }
+  .globo__pie { margin: 10px 0 0; padding-top: 8px; border-top: 1px solid var(--linea); font-size: 0.74rem; color: #74766a; }
   @media (max-width: 900px) {
     .globo { justify-self: center; width: min(100%, 240px); order: -1; margin-bottom: var(--s-2); }
     .globo__arbol { display: none; }
@@ -96,12 +103,12 @@ const arbol = [
     .globo.abierto .globo__rotulo { opacity: 1; }
     .globo__arbol ul { font-size: 0.62rem; line-height: 1.45; }
     .globo__pie, .globo__ruta { font-size: 0.66rem; }
-    .globo__arbol em { display: none; }
+    .globo__arbol em, .globo__arbol b { display: none; }
   }
 </style>
 
 <script>
-  import { geoOrthographic, geoDistance, geoInterpolate } from "d3-geo";
+  import { geoOrthographic, geoDistance, geoInterpolate, geoGraticule, geoPath } from "d3-geo";
 
   for (const raiz of document.querySelectorAll<HTMLElement>("[data-globo]")) {
     const lienzo = raiz.querySelector("canvas")!;
@@ -123,8 +130,9 @@ const arbol = [
     addEventListener("resize", ajustar);
 
     const proyeccion = geoOrthographic().clipAngle(90);
+    const RETICULA = geoGraticule().step([30, 30])();
     const PERU: [number, number] = [-75.5, -9.5];
-    const MINA: [number, number] = [-71.36, -14.87];
+    const MINA: [number, number] = [-72.9503, -11.8387]; // Camisea, Cusco
     const facil = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
     const tramo = (t: number, a: number, b: number) => Math.min(Math.max((t - a) / (b - a), 0), 1);
 
@@ -141,63 +149,71 @@ const arbol = [
       if (aMina > 0) centro = geoInterpolate(PERU, MINA)(aMina) as [number, number];
       if (regreso > 0) centro = geoInterpolate(MINA, INICIO)(regreso) as [number, number];
       const zoomPeru = 1 + 2.6 * alPeru;
-      const zoomMina = zoomPeru * (1 + 85 * aMina);
+      const zoomMina = zoomPeru * (1 + 2.2 * aMina);
       const zoom = regreso > 0 ? 1 + (zoomMina - 1) * (1 - regreso) : zoomMina;
       const lado_ = facil(tramo(t, 10.2, 11.2)) * (1 - facil(tramo(t, 16, 16.8)));
       return { centro, zoom, peru: alPeru, mina: aMina * (1 - regreso), abierto: t > 10.8 && t < 16.2, corrido: lado_, t };
     }
 
     function dibujar(s: ReturnType<typeof estado>) {
-      const radio = lado * 0.43;
-      const cx = lado / 2 - (lado < 300 ? 0 : lado * 0.24 * (s.corrido || 0));
+      const abre = lado < 300 ? 0 : s.corrido || 0;
+      const radio = lado * 0.43 * (1 - 0.42 * abre);
+      const cx = lado / 2 - lado * 0.26 * abre;
       proyeccion.scale(radio * s.zoom).translate([cx, lado / 2]).rotate([-s.centro[0], -s.centro[1]]);
       ctx.clearRect(0, 0, lado, lado);
       // Todo se dibuja dentro de un círculo fijo: al acercarse se ve como una lupa, no un cuadrado.
       ctx.save();
       ctx.beginPath();
-      ctx.arc(lado / 2, lado / 2, radio * 1.04, 0, Math.PI * 2);
+      ctx.arc(cx, lado / 2, radio * 1.04, 0, Math.PI * 2);
       ctx.clip();
-      // Esfera
-      const g = ctx.createRadialGradient(lado * 0.38, lado * 0.36, radio * 0.1, lado / 2, lado / 2, radio * 1.1);
-      g.addColorStop(0, "rgba(95,233,232,0.18)");
-      g.addColorStop(1, "rgba(0,61,226,0.10)");
+      // Retícula cada 30°, fina, como en Portolan
       ctx.beginPath();
-      ctx.arc(cx, lado / 2, radio * s.zoom, 0, Math.PI * 2);
-      ctx.fillStyle = g;
-      ctx.fill();
+      geoPath(proyeccion, ctx)(RETICULA);
+      ctx.strokeStyle = "rgba(0,61,226,0.22)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
 
       const visible = (p: [number, number]) => geoDistance(p, s.centro) < Math.PI / 2 - 0.02;
       const punto = (p: [number, number], r: number) => {
         const xy = proyeccion(p);
         if (!xy || xy[0] < -10 || xy[1] < -10 || xy[0] > lado + 10 || xy[1] > lado + 10) return;
-        ctx.moveTo(xy[0] + r, xy[1]);
-        ctx.arc(xy[0], xy[1], r, 0, Math.PI * 2);
+        ctx.rect(xy[0] - r, xy[1] - r, 2 * r, 2 * r);
       };
-      const tam = Math.min(1.5 * Math.sqrt(s.zoom), 3.4);
+      const tam = Math.min(Math.max(1.4, radio / 150) * 0.85 * Math.sqrt(s.zoom), 3);
       ctx.beginPath();
       for (const p of datos.mundo) if (visible(p)) punto(p, tam);
-      ctx.fillStyle = `rgba(255,255,255,${0.55 - 0.25 * s.peru})`;
+      ctx.fillStyle = `rgba(0,61,226,${0.9 - 0.45 * s.peru})`;
       ctx.fill();
       ctx.beginPath();
       for (const p of datos.peru) if (visible(p)) punto(p, Math.min(tam * 0.55, 1.8));
-      const aPeru = (0.75 + 0.25 * s.peru) * (1 - Math.min(s.mina * 1.6, 1));
-      ctx.fillStyle = `rgba(95,233,232,${Math.max(aPeru, 0)})`;
+      const aPeru = 0.75 + 0.25 * s.peru;
+      ctx.fillStyle = `rgba(8,71,144,${Math.max(aPeru, 0)})`;
       ctx.fill();
       if (s.mina > 0.05) {
-        ctx.beginPath();
-        for (const p of datos.estaciones) punto(p, 2.2);
-        ctx.fillStyle = `rgba(221,127,61,${s.mina})`;
-        ctx.fill();
+        // Camisea: un punto y un anillo que late. Sin estaciones inventadas.
+        const xy = proyeccion(MINA);
+        if (xy) {
+          const pulso = (s.t % 1.6) / 1.6;
+          ctx.beginPath();
+          ctx.arc(xy[0], xy[1], 6 + 18 * pulso, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(221,127,61,${s.mina * (1 - pulso)})`;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(xy[0], xy[1], 5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(221,127,61,${s.mina})`;
+          ctx.fill();
+        }
       }
       ctx.restore();
-      // Aro fijo del globo
+      // Aro del globo, que se mueve con él
       ctx.beginPath();
-      ctx.arc(lado / 2, lado / 2, radio * 1.04, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(95,233,232,0.35)";
+      ctx.arc(cx, lado / 2, radio * 1.04, 0, Math.PI * 2);
+      ctx.strokeStyle = "rgba(0,61,226,0.8)";
       ctx.lineWidth = 1;
       ctx.stroke();
       const movil = lado < 300;
-      const texto = s.abierto && movil ? "Catálogo STAC y 12 tablas Parquet" : s.mina > 0.5 ? "Antapaccay, 504 estaciones" : s.peru > 0.6 ? "Perú" : "";
+      const texto = s.abierto && movil ? "Ejemplo: catálogo STAC y Parquet" : s.mina > 0.5 ? "Camisea, Cusco" : s.peru > 0.6 ? "Perú" : "";
       if (rotulo.textContent !== texto) rotulo.textContent = texto;
       rotulo.classList.toggle("mina", s.mina > 0.5);
       raiz.classList.toggle("abierto", s.abierto);
