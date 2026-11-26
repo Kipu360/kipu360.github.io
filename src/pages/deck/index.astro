@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import { hero, problema, porQueAhora, queHacemos, servicios, arquitectura, piloto, cierre, DEMO_URL } from "../../data/contenido";
 const pdf = "/deck/kipu360-deck.pdf";
 ---
-<Base title="Presentación · Kipu360" description="Presentación de Kipu360: infraestructura de datos ambientales abierta y lista para la inteligencia artificial.">
+<Base title="Presentación de Kipu360" description="Presentación de Kipu360: infraestructura de datos ambientales abierta y lista para la inteligencia artificial.">
 
   <div class="laminas">
     <section class="lamina on-dark lamina--hero">
@@ -20,7 +20,7 @@ const pdf = "/deck/kipu360-deck.pdf";
     <section class="lamina seccion--clara">
       <div class="lamina__cuerpo problema__grid">
         <div>
-          <p class="eyebrow">02 · {problema.eyebrow}</p>
+          <p class="eyebrow">{problema.eyebrow}</p>
           <h2 class="titulo-doble">{problema.titulo.map((t) => <span>{t}</span>)}</h2>
           <p>{problema.texto}</p>
           <blockquote class="cita"><p>«{problema.cita}»</p><cite>{problema.fuente}</cite></blockquote>
@@ -34,7 +34,7 @@ const pdf = "/deck/kipu360-deck.pdf";
 
     <section class="lamina on-dark">
       <div class="lamina__cuerpo">
-        <p class="eyebrow">03 · {porQueAhora.eyebrow}</p>
+        <p class="eyebrow">{porQueAhora.eyebrow}</p>
         <h2 class="titulo-doble">{porQueAhora.titulo.map((t) => <span>{t}</span>)}</h2>
         <ol class="linea">
           {porQueAhora.hitos.map((h) => (
@@ -51,7 +51,7 @@ const pdf = "/deck/kipu360-deck.pdf";
 
     <section class="lamina seccion--blanca">
       <div class="lamina__cuerpo">
-        <p class="eyebrow">04 · {queHacemos.eyebrow}</p>
+        <p class="eyebrow">{queHacemos.eyebrow}</p>
         <h2>{queHacemos.titulo}</h2>
         <div class="flujo">
           <ul class="flujo__col flujo__col--origen">{queHacemos.origenes.map((o) => <li>{o}</li>)}</ul>
@@ -68,7 +68,7 @@ const pdf = "/deck/kipu360-deck.pdf";
 
     <section class="lamina seccion--clara">
       <div class="lamina__cuerpo">
-        <p class="eyebrow">05 · {servicios.eyebrow}</p>
+        <p class="eyebrow">{servicios.eyebrow}</p>
         <h2 class="titulo-doble">{servicios.titulo.map((t) => <span>{t}</span>)}</h2>
         <div class="servicios">
           {servicios.grupos.map((g) => (
@@ -82,7 +82,7 @@ const pdf = "/deck/kipu360-deck.pdf";
 
     <section class="lamina on-dark">
       <div class="lamina__cuerpo">
-        <p class="eyebrow">06 · {arquitectura.eyebrow}</p>
+        <p class="eyebrow">{arquitectura.eyebrow}</p>
         <h2 class="titulo-doble">{arquitectura.titulo.map((t) => <span>{t}</span>)}</h2>
         <p>{arquitectura.donde}</p>
         <ol class="pipeline">
@@ -97,7 +97,7 @@ const pdf = "/deck/kipu360-deck.pdf";
 
     <section class="lamina seccion--clara">
       <div class="lamina__cuerpo">
-        <p class="eyebrow">07 · {piloto.eyebrow}</p>
+        <p class="eyebrow">{piloto.eyebrow}</p>
         <h2 class="titulo-doble">{piloto.titulo.map((t) => <span>{t}</span>)}</h2>
         <p class="lead">{piloto.texto}</p>
         <ol class="linea">
@@ -113,7 +113,7 @@ const pdf = "/deck/kipu360-deck.pdf";
     <section class="lamina on-dark lamina--hero">
       <div class="lamina__cuerpo hero__grid">
         <div>
-          <p class="eyebrow">08 · {cierre.eyebrow}</p>
+          <p class="eyebrow">{cierre.eyebrow}</p>
           <h2 class="lamina__grande">{cierre.titulo}</h2>
           <p class="lead">{cierre.texto}</p>
           <div class="botones"><a class="boton" href={DEMO_URL}>Ver la demo →</a></div>

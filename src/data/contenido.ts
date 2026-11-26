@@ -18,7 +18,7 @@ export const problema = {
   cita: "La generación de información ambiental en Perú está desarticulada",
   fuente: "Compromiso PE0093 del Perú, Alianza para el Gobierno Abierto",
   instituciones: [
-    "MINAM · SINIA",
+    "MINAM (SINIA)",
     "ANA",
     "SENAMHI",
     "OEFA",
@@ -85,7 +85,7 @@ export const arquitectura = {
   pasos: [
     { nombre: "Fuentes", detalle: "PDF, Excel, laboratorios y portales. Públicas y privadas." },
     { nombre: "Ingesta", detalle: "Extracción, validación y revisión." },
-    { nombre: "Datos ordenados · Portolan", detalle: "Tablas, documentos y capas en S3 con catálogo STAC versionado.", destacado: true },
+    { nombre: "Datos ordenados con Portolan", detalle: "Tablas, documentos y capas en S3 con catálogo STAC versionado.", destacado: true },
     { nombre: "Consulta", detalle: "Sin servidores, con permisos y rastro." },
     { nombre: "IA y agentes", detalle: "MCP, skills y asistente que cita fuentes." },
   ],
@@ -165,14 +165,14 @@ export const materiales = [
   {
     nombre: "Presentación",
     cta: "Ver la presentación",
-    detalle: "Ocho láminas: el problema, por qué ahora, qué hacemos, servicios, arquitectura y cómo empezamos.",
+    detalle: "El problema, por qué ahora, qué hacemos, servicios, arquitectura y cómo empezamos.",
     href: "/deck/",
     pdf: "/deck/kipu360-deck.pdf",
   },
   {
     nombre: "Resumen en una página",
     cta: "Ver el resumen",
-    detalle: "Kipu360 en una página: arquitectura, qué hacemos, servicios, para quién y principios.",
+    detalle: "Arquitectura, qué hacemos, servicios, para quién y principios, en una sola hoja.",
     href: "/one-pager/",
     pdf: "/one-pager/kipu360-one-pager.pdf",
   },

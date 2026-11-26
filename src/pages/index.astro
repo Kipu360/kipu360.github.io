@@ -21,7 +21,7 @@ import { hero, problema, queHacemos, servicios, piloto, cierre, materiales, DEMO
   <section id="problema" class="seccion seccion--clara">
     <div class="contenedor problema__grid">
       <div>
-        <p class="eyebrow">01 · {problema.eyebrow}</p>
+        <p class="eyebrow">{problema.eyebrow}</p>
         <h2 class="titulo-doble">{problema.titulo.map((t) => <span>{t}</span>)}</h2>
         <p>{problema.texto}</p>
         <blockquote class="cita">
@@ -40,7 +40,7 @@ import { hero, problema, queHacemos, servicios, piloto, cierre, materiales, DEMO
 
   <section id="que-hacemos" class="seccion seccion--blanca">
     <div class="contenedor">
-      <p class="eyebrow">02 · {queHacemos.eyebrow}</p>
+      <p class="eyebrow">{queHacemos.eyebrow}</p>
       <h2>{queHacemos.titulo}</h2>
       <div class="flujo">
         <ul class="flujo__col flujo__col--origen" aria-label="De dónde viene la información">
@@ -73,7 +73,7 @@ import { hero, problema, queHacemos, servicios, piloto, cierre, materiales, DEMO
 
   <section id="piloto" class="seccion on-dark">
     <div class="contenedor">
-      <p class="eyebrow">03 · {piloto.eyebrow}</p>
+      <p class="eyebrow">{piloto.eyebrow}</p>
       <h2 class="titulo-doble">{piloto.titulo.map((t) => <span>{t}</span>)}</h2>
       <p class="lead">{piloto.texto}</p>
       <ol class="linea">
@@ -95,7 +95,6 @@ import { hero, problema, queHacemos, servicios, piloto, cierre, materiales, DEMO
       <div class="materiales">
         {materiales.map((m) => (
           <article class="tarjeta">
-            <span class="tarjeta__tipo">Para descargar</span>
             <h3>{m.nombre}</h3>
             <p>{m.detalle}</p>
             <div class="tarjeta__acciones">

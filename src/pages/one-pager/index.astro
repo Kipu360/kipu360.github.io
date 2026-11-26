@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import { hero, onePager as o, DEMO_URL } from "../../data/contenido";
 const pdf = "/one-pager/kipu360-one-pager.pdf";
 ---
-<Base title="Resumen en una página · Kipu360" description="Kipu360 en una página.">
+<Base title="Resumen de Kipu360" description="Kipu360 en una página.">
 
   <div class="hoja-fondo">
     <article class="hoja">
@@ -14,7 +14,7 @@ const pdf = "/one-pager/kipu360-one-pager.pdf";
       </header>
 
       <section class="hoja__arq">
-        <p class="rotulo">Arquitectura · {o.arquitecturaRotulo}</p>
+        <p class="rotulo">{o.arquitecturaRotulo}</p>
         <ol class="hoja__pipeline">
           {o.arquitectura.map((p) => <li class={p.destacado ? "destacado" : ""}><strong>{p.nombre}</strong><span>{p.detalle}</span></li>)}
         </ol>
