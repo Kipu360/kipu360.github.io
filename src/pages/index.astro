@@ -10,8 +10,8 @@ import { hero, problema, queHacemos, servicios, piloto, cierre, materiales, DEMO
         <h1>{hero.titulo}</h1>
         <p class="lead">{hero.bajada}</p>
         <div class="botones">
-          <a class="boton" href="/deck/">Ver el deck</a>
-          <a class="boton boton--borde" href="/one-pager/">Ver el one-pager</a>
+          <a class="boton" href="/deck/">Ver la presentación</a>
+          <a class="boton boton--borde" href="/one-pager/">Ver el resumen</a>
         </div>
       </div>
       <img class="hero__mapa" src="/brand/peru.svg" alt="" width="608" height="887" />
@@ -95,11 +95,11 @@ import { hero, problema, queHacemos, servicios, piloto, cierre, materiales, DEMO
       <div class="materiales">
         {materiales.map((m) => (
           <article class="tarjeta">
-            <span class="tarjeta__tipo">Material</span>
+            <span class="tarjeta__tipo">Para descargar</span>
             <h3>{m.nombre}</h3>
             <p>{m.detalle}</p>
             <div class="tarjeta__acciones">
-              <a class="boton" href={m.href}>Ver {m.nombre.toLowerCase()}</a>
+              <a class="boton" href={m.href}>{m.cta}</a>
               <a class="boton boton--borde" href={m.pdf} download>Descargar PDF</a>
             </div>
           </article>

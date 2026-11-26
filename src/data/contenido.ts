@@ -7,7 +7,7 @@ export const DEMO_URL = "https://sammy-carlos.github.io/environmental-data-explo
 export const hero = {
   titulo: "Infraestructura de datos ambientales abierta y lista para la inteligencia artificial.",
   bajada:
-    "Monitoreos, resultados de laboratorio, estudios, documentos y mapas. Ordenamos toda la información ambiental del Perú, conservamos la fuente de cada dato y la conectamos con sus equipos y sus agentes de IA.",
+    "Monitoreos, resultados de laboratorio, estudios, documentos y mapas. Ordenamos toda la información ambiental del Perú, conservamos la fuente de cada dato y la conectamos con sus equipos y sus agentes de\u00a0IA.",
 };
 
 export const problema = {
@@ -163,13 +163,15 @@ export const onePager = {
 
 export const materiales = [
   {
-    nombre: "Deck",
+    nombre: "Presentación",
+    cta: "Ver la presentación",
     detalle: "Ocho láminas: el problema, por qué ahora, qué hacemos, servicios, arquitectura y cómo empezamos.",
     href: "/deck/",
     pdf: "/deck/kipu360-deck.pdf",
   },
   {
-    nombre: "One-pager",
+    nombre: "Resumen en una página",
+    cta: "Ver el resumen",
     detalle: "Kipu360 en una página: arquitectura, qué hacemos, servicios, para quién y principios.",
     href: "/one-pager/",
     pdf: "/one-pager/kipu360-one-pager.pdf",

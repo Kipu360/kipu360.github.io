@@ -23,8 +23,8 @@
   --font-texto: "Plus Jakarta Sans", system-ui, sans-serif;
   --fs-0: 1rem;
   --fs-1: 1.125rem;
-  --fs-2: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
-  --fs-3: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
+  --fs-2: clamp(1.75rem, 1.3rem + 1.6vw, 2.6rem);
+  --fs-3: clamp(2.1rem, 1.4rem + 3.4vw, 4.25rem);
 
   /* Espacio */
   --s-1: 0.5rem;

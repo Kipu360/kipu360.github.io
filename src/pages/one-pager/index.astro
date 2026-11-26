@@ -3,10 +3,10 @@ import Base from "../../layouts/Base.astro";
 import { hero, onePager as o, DEMO_URL } from "../../data/contenido";
 const pdf = "/one-pager/kipu360-one-pager.pdf";
 ---
-<Base title="One-pager · Kipu360" description="Kipu360 en una página.">
+<Base title="Resumen en una página · Kipu360" description="Kipu360 en una página.">
   <div class="barra no-print">
     <div class="contenedor barra__fila">
-      <span>One-pager</span>
+      <p class="barra__titulo">Resumen en una página <small>· 1 página A4</small></p>
       <a class="boton" href={pdf} download>Descargar PDF</a>
     </div>
   </div>
@@ -59,12 +59,21 @@ const pdf = "/one-pager/kipu360-one-pager.pdf";
       </div>
     </article>
   </div>
+  <div class="barra barra--fin no-print">
+    <div class="contenedor barra__fila">
+      <a class="boton" href={pdf} download>Descargar PDF</a>
+      <a class="boton boton--borde" href="/">Volver al inicio</a>
+    </div>
+  </div>
 </Base>
 
 <style is:global>
-  .barra { position: sticky; top: 0; z-index: 5; background: var(--blanco); border-bottom: 1px solid var(--linea); padding-block: var(--s-1); }
-  .barra__fila { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-titulo); font-weight: 500; color: var(--azul-oscuro); }
-  .barra .boton { padding: 0.55em 1.1em; }
+  .barra { background: var(--piel); padding-block: var(--s-3); }
+  .barra__fila { display: flex; flex-wrap: wrap; gap: var(--s-2); justify-content: space-between; align-items: center; font-family: var(--font-titulo); font-weight: 500; color: var(--azul-oscuro); }
+  .barra__titulo { font-family: var(--font-titulo); font-weight: 700; font-size: var(--fs-2); color: var(--azul-oscuro); margin: 0; }
+  .barra__titulo small { font-weight: 500; font-size: 0.55em; color: var(--texto-suave); }
+  .barra--fin { padding-block: var(--s-5); text-align: center; }
+  .barra--fin .barra__fila { justify-content: center; }
 
   .hoja-fondo { padding: var(--s-5) var(--s-2); }
   .hoja { width: min(100%, 210mm); margin-inline: auto; background: var(--blanco); box-shadow: 0 20px 50px -30px rgb(8 71 144 / 0.5); font-size: 0.95rem; line-height: 1.5; }

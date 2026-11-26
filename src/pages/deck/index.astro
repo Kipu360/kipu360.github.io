@@ -3,10 +3,10 @@ import Base from "../../layouts/Base.astro";
 import { hero, problema, porQueAhora, queHacemos, servicios, arquitectura, piloto, cierre, DEMO_URL } from "../../data/contenido";
 const pdf = "/deck/kipu360-deck.pdf";
 ---
-<Base title="Deck · Kipu360" description="Deck de Kipu360: infraestructura de datos ambientales abierta y lista para la inteligencia artificial.">
+<Base title="Presentación · Kipu360" description="Presentación de Kipu360: infraestructura de datos ambientales abierta y lista para la inteligencia artificial.">
   <div class="barra no-print">
     <div class="contenedor barra__fila">
-      <span>Deck · 8 láminas</span>
+      <p class="barra__titulo">Presentación <small>· 8 láminas</small></p>
       <a class="boton" href={pdf} download>Descargar PDF</a>
     </div>
   </div>
@@ -128,14 +128,27 @@ const pdf = "/deck/kipu360-deck.pdf";
       </div>
     </section>
   </div>
+  <div class="barra barra--fin no-print">
+    <div class="contenedor barra__fila">
+      <a class="boton" href={pdf} download>Descargar PDF</a>
+      <a class="boton boton--borde" href="/">Volver al inicio</a>
+    </div>
+  </div>
 </Base>
 
 <style is:global>
-  .barra { position: sticky; top: 0; z-index: 5; background: var(--blanco); border-bottom: 1px solid var(--linea); padding-block: var(--s-1); }
-  .barra__fila { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-titulo); font-weight: 500; color: var(--azul-oscuro); }
-  .barra .boton { padding: 0.55em 1.1em; }
+  .barra { background: var(--piel); padding-block: var(--s-3); }
+  .barra__fila { display: flex; flex-wrap: wrap; gap: var(--s-2); justify-content: space-between; align-items: center; font-family: var(--font-titulo); font-weight: 500; color: var(--azul-oscuro); }
+  .barra__titulo { font-family: var(--font-titulo); font-weight: 700; font-size: var(--fs-2); color: var(--azul-oscuro); margin: 0; }
+  .barra__titulo small { font-weight: 500; font-size: 0.55em; color: var(--texto-suave); }
+  .barra--fin { padding-block: var(--s-5); text-align: center; }
+  .barra--fin .barra__fila { justify-content: center; }
   .lamina { min-height: min(100vh, 56.25vw + 2rem); display: flex; align-items: center; padding-block: var(--s-5); position: relative; overflow: hidden; }
-  .lamina__cuerpo { width: min(100% - 2 * var(--s-4), 76rem); margin-inline: auto; }
+  .laminas { counter-reset: lamina; }
+  .lamina { counter-increment: lamina; border-top: 1px solid var(--linea); }
+  .lamina::after { content: counter(lamina) " / 8"; position: absolute; right: var(--s-3); bottom: var(--s-2); font-family: var(--font-titulo); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.06em; color: var(--texto-suave); }
+  .on-dark.lamina::after { color: var(--cian); }
+  .lamina__cuerpo { width: min(100% - 2 * var(--s-3), var(--ancho)); margin-inline: auto; }
   .lamina__logo { height: 56px; width: auto; margin-bottom: var(--s-4); }
   .lamina--hero .hero__mapa { width: min(100%, 380px); }
   .lamina__cierre { margin-top: var(--s-4); font-family: var(--font-titulo); font-weight: 500; font-size: 1.25rem; }
