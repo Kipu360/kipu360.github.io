@@ -2,7 +2,9 @@
 // (kipu-360-web/context/piezas/texto/deck.txt, one-pager.txt y textos/*.md).
 // No agregar cifras ni afirmaciones que no estén en esas fuentes.
 
-export const DEMO_URL = "https://sammy-carlos.github.io/environmental-data-explorer/";
+export const DEMO_URL = "https://kipu360.github.io/environmental-data-explorer/";
+export const GITHUB_URL = "https://github.com/Kipu360";
+export const HF_URL = "https://huggingface.co/Kipu360";
 
 export const hero = {
   titulo: "Infraestructura de datos ambientales abierta y lista para la inteligencia artificial.",
@@ -212,4 +214,20 @@ export const empresa = {
     { nombre: "Presentación", detalle: "El problema, qué hacemos, servicios, arquitectura y cómo empezamos.", pdf: "/deck/kipu360-deck.pdf", archivo: "PDF, 8 páginas" },
     { nombre: "Resumen ejecutivo", detalle: "Kipu360 en una hoja, para compartir.", pdf: "/one-pager/kipu360-one-pager.pdf", archivo: "PDF, 1 página" },
   ],
+};
+
+// Hero y ficha de trazabilidad (v0.3). Frases de textos/onepager.md y del one-pager.pdf.
+export const portada = {
+  titulo: "Información ambiental que puede encontrarse, cruzarse y verificarse.",
+  bajada: "Kipu360 es una empresa peruana de tecnología. Reunimos información dispersa sobre el ambiente y el territorio, documentamos su procedencia y la conectamos con sus equipos y sus agentes de IA.",
+  ficha: {
+    titulo: "Cada dato conserva su fuente",
+    filas: [
+      { campo: "Fuente", valor: "Institución, empresa o laboratorio" },
+      { campo: "Archivo", valor: "PDF, Excel o portal de origen" },
+      { campo: "Hoja y fila", valor: "Dónde está el valor original" },
+      { campo: "Historial", valor: "Cada corrección queda registrada" },
+    ],
+    chips: ["STAC versionado", "Formatos abiertos", "Sin servidores"],
+  },
 };

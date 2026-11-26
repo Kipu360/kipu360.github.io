@@ -16,7 +16,7 @@
   --negro: #252424;       /* texto */
   --blanco: #FFFFFF;      /* tarjetas */
   --linea: color-mix(in srgb, var(--negro) 14%, transparent);
-  --texto-suave: color-mix(in srgb, var(--negro) 78%, var(--piel));
+  --texto-suave: color-mix(in srgb, var(--negro) 88%, var(--piel));
 
   /* Tipografia */
   --font-titulo: "Space Grotesk", system-ui, sans-serif;

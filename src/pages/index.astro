@@ -1,83 +1,101 @@
 ---
 import Base from "../layouts/Base.astro";
-import { empresa as e, problema, queHacemos, onePager, servicios, piloto, DEMO_URL } from "../data/contenido";
+import { empresa as e, portada as h, problema, onePager, servicios, piloto, arquitectura, DEMO_URL, GITHUB_URL, HF_URL } from "../data/contenido";
+
+const iconos = [
+  // Ordenamos: capas
+  '<path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/><path d="m3 17.5 9 5 9-5" opacity=".5"/>',
+  // Desplegamos: nube
+  '<path d="M7 18h10a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.1 9.1 4.5 4.5 0 0 0 7 18Z"/>',
+  // Conectamos: nodos
+  '<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="m8.3 10.9 7.4-3.7M8.3 13.1l7.4 3.7"/>',
+];
 ---
 <Base>
-  <section id="hero" class="hero on-dark">
-    <div class="contenedor hero__grid">
-      <div>
-        <h1>{e.titulo}</h1>
-        <p class="lead">{e.bajada}</p>
+  <section id="hero" class="portada">
+    <div class="contenedor portada__grid">
+      <div class="portada__texto">
+        <h1>{h.titulo}</h1>
+        <p class="lead">{h.bajada}</p>
         <div class="botones">
           <a class="boton" href="#que-hacemos">Qué hacemos</a>
           <a class="boton boton--borde" href={DEMO_URL}>Ver la demo</a>
         </div>
       </div>
-      <img class="hero__mapa" src="/brand/peru.svg" alt="" width="608" height="887" />
+      <div class="ficha" aria-label="Ejemplo de trazabilidad de un dato">
+        <div class="ficha__cabeza">
+          <span class="ficha__punto"></span>
+          <strong>{h.ficha.titulo}</strong>
+        </div>
+        <dl>
+          {h.ficha.filas.map((f) => <div><dt>{f.campo}</dt><dd>{f.valor}</dd></div>)}
+        </dl>
+        <ul class="ficha__chips">{h.ficha.chips.map((c) => <li>{c}</li>)}</ul>
+      </div>
+    </div>
+    <img class="portada__mapa" src="/brand/peru.svg" alt="" width="608" height="887" />
+  </section>
+
+  <section class="franja" aria-label="Estándares y formatos abiertos">
+    <div class="contenedor franja__fila">
+      <p>Construido sobre estándares abiertos</p>
+      <ul>{arquitectura.formatos.map((f) => <li><img src={f.logo} alt="" width="22" height="22" />{f.nombre}</li>)}</ul>
     </div>
   </section>
 
-  <section id="problema" class="seccion seccion--clara">
-    <div class="contenedor problema__grid">
+  <section id="problema" class="bloque">
+    <div class="contenedor problema">
       <div>
         <p class="eyebrow">El problema</p>
-        <h2 class="titulo-doble">{problema.titulo.map((t) => <span>{t}</span>)}</h2>
+        <h2>{problema.titulo[0]} <em>{problema.titulo[1]}</em></h2>
         <p>{e.problema}</p>
+      </div>
+      <div class="problema__lado">
+        <ul class="fuentes">{problema.instituciones.map((i) => <li>{i}</li>)}</ul>
         <blockquote class="cita">
           <p>«{problema.cita}»</p>
           <cite>{problema.fuente}</cite>
         </blockquote>
       </div>
-      <ul class="nube" aria-label="Instituciones que publican información ambiental">
-        {problema.instituciones.map((i) => <li>{i}</li>)}
-      </ul>
     </div>
   </section>
 
-  <section id="que-hacemos" class="seccion seccion--blanca">
+  <section id="que-hacemos" class="bloque">
     <div class="contenedor">
-      <div class="dos-col">
-        <div>
-          <p class="eyebrow">Qué hacemos</p>
-          <h2>{queHacemos.titulo}</h2>
-        </div>
-        <div>
-          {e.queHacemos.map((p) => <p>{p}</p>)}
-        </div>
+      <div class="encabezado">
+        <p class="eyebrow">Qué hacemos</p>
+        <h2>Un solo lugar para toda la información ambiental del Perú.</h2>
+        <p>{e.queHacemos[0]}</p>
       </div>
-      <div class="pilares">
-        {onePager.queHacemos.map((q) => (
-          <article class="pilar">
+      <div class="bento">
+        {onePager.queHacemos.map((q, i) => (
+          <article class="tarjeta-b">
+            <svg class="tarjeta-b__icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={iconos[i]} />
             <h3>{q.verbo.replace(".", "")}</h3>
             <p>{q.texto}</p>
           </article>
         ))}
+        <article class="tarjeta-b tarjeta-b--ancha">
+          <h3>Sobre esa base, los servicios</h3>
+          <div class="servicios-b">
+            {servicios.grupos.map((g) => (
+              <div><h4>{g.nombre}</h4><ul>{g.items.map((i) => <li>{i}</li>)}</ul></div>
+            ))}
+          </div>
+          <p class="nota">{servicios.nota}</p>
+        </article>
       </div>
       <p class="estandares">{e.estandares}</p>
     </div>
   </section>
 
-  <section id="servicios" class="seccion seccion--clara">
+  <section id="como-trabajamos" class="bloque bloque--oscuro on-dark">
     <div class="contenedor">
-      <p class="eyebrow">Servicios</p>
-      <h2 class="titulo-doble">{servicios.titulo.map((t) => <span>{t}</span>)}</h2>
-      <div class="servicios">
-        {servicios.grupos.map((g) => (
-          <div class="servicios__grupo">
-            <h3>{g.nombre}</h3>
-            <ul>{g.items.map((i) => <li>{i}</li>)}</ul>
-          </div>
-        ))}
-        <div class="servicios__base">{servicios.base}</div>
+      <div class="encabezado">
+        <p class="eyebrow">Cómo trabajamos</p>
+        <h2>{piloto.titulo.join(" ")}</h2>
+        <p>{piloto.texto} Sus datos son suyos y no se usan para entrenar modelos.</p>
       </div>
-    </div>
-  </section>
-
-  <section id="como-trabajamos" class="seccion on-dark">
-    <div class="contenedor">
-      <p class="eyebrow">Cómo trabajamos</p>
-      <h2 class="titulo-doble">{piloto.titulo.map((t) => <span>{t}</span>)}</h2>
-      <p class="lead">{piloto.texto} Sus datos son suyos y no se usan para entrenar modelos.</p>
       <ol class="linea">
         {piloto.pasos.map((p) => (
           <li class={p.abierto ? "abierto" : ""}>
@@ -90,86 +108,150 @@ import { empresa as e, problema, queHacemos, onePager, servicios, piloto, DEMO_U
     </div>
   </section>
 
-  <section id="para-quien" class="seccion seccion--blanca">
+  <section id="para-quien" class="bloque">
     <div class="contenedor">
-      <div class="dos-col">
-        <div>
-          <p class="eyebrow">Para quién</p>
-          <h2>Organizaciones que trabajan con información del territorio.</h2>
-        </div>
+      <div class="encabezado">
+        <p class="eyebrow">Para quién</p>
+        <h2>Organizaciones que trabajan con información del territorio.</h2>
         <p>{e.dondeSeAplica}</p>
       </div>
-      <div class="pilares">
-        {onePager.paraQuien.map((p) => (
-          <article class="pilar pilar--claro">
-            <h3>{p.nombre}</h3>
-            <p>{p.texto}</p>
-          </article>
-        ))}
+      <div class="tres">
+        {onePager.paraQuien.map((p) => <article class="tarjeta-b"><h3>{p.nombre}</h3><p>{p.texto}</p></article>)}
       </div>
       <p class="estandares">{e.modelo}</p>
     </div>
   </section>
 
-  <section id="nosotros" class="seccion seccion--clara">
+  <section id="nosotros" class="bloque">
     <div class="contenedor">
       <p class="eyebrow">Nosotros</p>
-      <div class="mv">
-        <div><h2>Misión</h2><p>{e.mision}</p></div>
-        <div><h2>Visión</h2><p>{e.vision}</p></div>
-      </div>
-      <h2 class="principios__titulo">Principios</h2>
-      <div class="principios">
-        {e.principios.map((p) => (
-          <article><h3>{p.nombre}</h3><p>{p.texto}</p></article>
-        ))}
+      <div class="nosotros">
+        <div>
+          <h2>Misión</h2>
+          <p>{e.mision}</p>
+          <h2 class="nosotros__vision">Visión</h2>
+          <p>{e.vision}</p>
+        </div>
+        <div>
+          <h2>Principios</h2>
+          <ul class="principios">
+            {e.principios.map((p) => <li><strong>{p.nombre}</strong>{p.texto}</li>)}
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="materiales" class="seccion seccion--blanca">
+  <section id="materiales" class="bloque">
     <div class="contenedor">
-      <p class="eyebrow">Materiales</p>
-      <h2>Para conocernos con más detalle.</h2>
-      <div class="descargas">
-        {e.descargas.map((d) => (
-          <a class="descarga" href={d.pdf} download>
-            <span class="descarga__nombre">{d.nombre}</span>
-            <span class="descarga__detalle">{d.detalle}</span>
-            <span class="descarga__archivo">Descargar ({d.archivo})</span>
-          </a>
-        ))}
+      <div class="cta">
+        <div>
+          <h2>Conozca Kipu360 con más detalle.</h2>
+          <p>Descargue la presentación o el resumen ejecutivo, o vea el código y los datos abiertos.</p>
+        </div>
+        <div class="cta__acciones">
+          {e.descargas.map((d) => (
+            <a class="descarga" href={d.pdf} download>
+              <span class="descarga__nombre">{d.nombre}</span>
+              <span class="descarga__archivo">{d.archivo}</span>
+            </a>
+          ))}
+          <div class="cta__enlaces">
+            <a href={GITHUB_URL}>GitHub</a>
+            <a href={HF_URL}>Hugging Face</a>
+            <a href={DEMO_URL}>Demo</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .hero h1 { max-width: 20ch; }
-  .dos-col { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--s-5); align-items: start; }
-  .dos-col h2 { margin: 0; }
-  .pilares { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-3); margin-top: var(--s-5); }
-  .pilar { background: var(--azul); color: var(--blanco); border-radius: var(--radio); padding: var(--s-4) var(--s-3); }
-  .pilar h3 { color: var(--blanco); font-size: 1.6rem; }
-  .pilar p { margin: 0; }
-  .pilar--claro { background: var(--piel); color: var(--negro); border: 1px solid var(--linea); }
-  .pilar--claro h3 { color: var(--azul-oscuro); font-size: 1.35rem; }
-  .estandares { margin-top: var(--s-4); color: var(--texto-suave); max-width: 75ch; }
-  .mv { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
-  .mv p { font-size: 1.15rem; }
-  .principios__titulo { margin-top: var(--s-5); }
-  .principios { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: var(--s-3) var(--s-4); }
-  .principios article { border-top: 3px solid var(--azul); padding-top: var(--s-2); }
-  .principios h3 { font-size: 1.1rem; margin-bottom: 0.4em; }
-  .principios p { font-size: 1rem; color: var(--texto-suave); margin: 0; }
-  .descargas { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); margin-top: var(--s-4); }
-  .descarga { display: grid; gap: var(--s-1); padding: var(--s-4); border-radius: var(--radio); background: var(--piel); border: 1px solid var(--linea); text-decoration: none; color: var(--negro); transition: transform 0.15s ease, box-shadow 0.15s ease; }
-  .descarga:hover { transform: translateY(-3px); box-shadow: 0 14px 34px -18px rgb(8 71 144 / 0.45); }
-  .descarga__nombre { font-family: var(--font-titulo); font-weight: 700; font-size: 1.6rem; color: var(--azul-oscuro); }
-  .descarga__detalle { color: var(--texto-suave); }
-  .descarga__archivo { font-family: var(--font-titulo); font-weight: 700; color: var(--azul); margin-top: var(--s-1); }
-  @media (max-width: 860px) {
-    .dos-col, .mv, .descargas { grid-template-columns: 1fr; gap: var(--s-3); }
-    .pilares { grid-template-columns: 1fr; }
+  /* Portada */
+  .portada { position: relative; overflow: hidden; background: var(--azul-oscuro); color: var(--blanco); padding-block: var(--s-6); }
+  .portada__grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--s-5); align-items: center; }
+  .portada h1 { color: var(--blanco); font-size: clamp(2.1rem, 1.4rem + 2.6vw, 3.3rem); max-width: 21ch; }
+  .portada .lead { color: var(--blanco); opacity: 0.92; max-width: 50ch; }
+  .portada .boton { background: var(--cian); border-color: var(--cian); color: var(--negro); }
+  .portada .boton:hover { background: var(--blanco); border-color: var(--blanco); }
+  .portada .boton--borde { background: transparent; color: var(--blanco); border-color: rgb(255 255 255 / 0.7); }
+  .portada .boton--borde:hover { background: var(--blanco); color: var(--azul-oscuro); }
+  .portada__mapa { position: absolute; right: -4%; top: -10%; height: 125%; width: auto; opacity: 0.16; pointer-events: none; }
+
+  .ficha { background: var(--blanco); color: var(--negro); border-radius: 18px; padding: var(--s-3); box-shadow: 0 40px 80px -40px rgb(0 0 0 / 0.6); }
+  .ficha__cabeza { display: flex; align-items: center; gap: 0.6em; padding-bottom: var(--s-2); border-bottom: 1px solid var(--linea); font-family: var(--font-titulo); color: var(--azul-oscuro); }
+  .ficha__punto { width: 10px; height: 10px; border-radius: 50%; background: var(--verde); box-shadow: 0 0 0 4px color-mix(in srgb, var(--verde) 25%, transparent); }
+  .ficha dl { margin: var(--s-2) 0; display: grid; gap: 0; }
+  .ficha dl div { display: grid; grid-template-columns: 7.5rem 1fr; gap: var(--s-2); padding: 0.7em 0; border-bottom: 1px dashed var(--linea); }
+  .ficha dt { font-family: var(--font-titulo); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--azul); }
+  .ficha dd { margin: 0; font-size: 0.98rem; }
+  .ficha__chips { display: flex; flex-wrap: wrap; gap: 0.5em; list-style: none; margin: 0; padding: 0; }
+  .ficha__chips li { font-size: 0.82rem; font-weight: 600; padding: 0.3em 0.8em; border-radius: 999px; background: color-mix(in srgb, var(--azul) 9%, var(--blanco)); color: var(--azul-oscuro); }
+
+  /* Franja de estándares */
+  .franja { background: var(--blanco); border-bottom: 1px solid var(--linea); padding-block: var(--s-3); }
+  .franja__fila { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-2) var(--s-4); }
+  .franja p { margin: 0; font-weight: 500; color: var(--texto-suave); font-size: var(--fs-0); }
+  .franja ul { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4); list-style: none; margin: 0; padding: 0; }
+  .franja li { display: inline-flex; align-items: center; gap: 0.5em; font-family: var(--font-titulo); font-weight: 700; color: var(--negro); }
+  .franja img { width: 22px; height: 22px; object-fit: contain; filter: brightness(0); opacity: 0.85; }
+
+  /* Bloques: fondo continuo, separados por espacio */
+  .bloque { padding-block: var(--s-6) 0; }
+  .bloque--oscuro { margin-top: var(--s-6); padding-block: var(--s-6); background: var(--azul-oscuro); }
+  #materiales { padding-bottom: var(--s-6); }
+  .encabezado { max-width: 46rem; margin-bottom: var(--s-4); }
+  h2 em { font-style: normal; color: var(--azul); }
+
+  .problema { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); align-items: start; }
+  .fuentes { display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: var(--s-1); list-style: none; margin: 0 0 var(--s-3); padding: 0; }
+  .fuentes li { font-family: var(--font-titulo); font-weight: 500; font-size: 0.95rem; text-align: center; padding: 0.8em 0.5em; border: 1.5px dashed color-mix(in srgb, var(--azul-oscuro) 40%, transparent); border-radius: 10px; background: var(--blanco); color: var(--azul-oscuro); }
+
+  .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-3); }
+  .tarjeta-b { background: var(--blanco); border: 1px solid var(--linea); border-radius: 18px; padding: var(--s-4) var(--s-3); }
+  .tarjeta-b h3 { font-size: 1.35rem; }
+  .tarjeta-b p { margin: 0; color: var(--texto-suave); font-size: 1.05rem; }
+  .tarjeta-b__icono { width: 40px; height: 40px; color: var(--azul); margin-bottom: var(--s-2); }
+  .tarjeta-b--ancha { grid-column: 1 / -1; background: linear-gradient(135deg, var(--blanco), color-mix(in srgb, var(--cian) 14%, var(--blanco))); }
+  .servicios-b { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-3); margin-top: var(--s-2); }
+  .servicios-b h4 { font-family: var(--font-titulo); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--azul); margin: 0 0 0.5em; }
+  .servicios-b ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3em; font-weight: 500; }
+  .tarjeta-b .nota { margin-top: var(--s-3); }
+  .estandares { margin-top: var(--s-3); color: var(--negro); max-width: 75ch; font-size: 1.05rem; }
+
+  .tres { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); }
+  .tres .tarjeta-b { background: none; border: 0; border-top: 3px solid var(--azul); border-radius: 0; padding: var(--s-2) 0 0; }
+  .on-dark .encabezado p { opacity: 0.92; }
+
+  .nosotros { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: var(--s-5); }
+  .nosotros__vision { margin-top: var(--s-4); }
+  .principios { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); }
+  .principios li { padding-left: var(--s-2); border-left: 3px solid var(--azul); font-size: 1rem; color: var(--texto-suave); }
+  .principios strong { display: block; margin-bottom: 0.2em; }
+  .principios strong { color: var(--negro); font-family: var(--font-titulo); }
+
+  .cta { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--s-4); align-items: center; padding: var(--s-5); border-radius: 24px; background: var(--azul-oscuro); color: var(--blanco); }
+  .cta h2 { color: var(--blanco); }
+  .cta p { color: var(--blanco); opacity: 0.92; margin: 0; }
+  .cta__acciones { display: grid; gap: var(--s-2); }
+  .descarga { display: flex; justify-content: space-between; align-items: center; gap: var(--s-2); padding: var(--s-2) var(--s-3); border-radius: 14px; background: var(--blanco); color: var(--azul-oscuro); text-decoration: none; transition: transform 0.15s ease; }
+  .descarga:hover { transform: translateX(4px); }
+  .descarga__nombre { font-family: var(--font-titulo); font-weight: 700; font-size: 1.2rem; }
+  .descarga__archivo { font-size: 0.9rem; color: var(--texto-suave); }
+  .descarga__archivo::after { content: "  ↓"; color: var(--azul); font-weight: 700; }
+  .cta__enlaces { display: flex; gap: var(--s-3); padding-top: var(--s-1); }
+  .cta__enlaces a { color: var(--blanco); font-family: var(--font-titulo); font-weight: 700; }
+
+  @media (max-width: 900px) {
+    .portada__grid, .problema, .nosotros, .cta { grid-template-columns: 1fr; }
+    .bento, .tres, .principios { grid-template-columns: 1fr; }
+    .servicios-b { grid-template-columns: 1fr 1fr; }
+    .portada__mapa { height: 70%; top: auto; bottom: -5%; right: -25%; }
+    .cta { padding: var(--s-4) var(--s-3); }
+  }
+  @media (max-width: 480px) {
+    .fuentes { grid-template-columns: 1fr 1fr; }
+    .ficha dl div { grid-template-columns: 1fr; gap: 0.2em; }
   }
 </style>
