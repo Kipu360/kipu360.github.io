@@ -1,13 +1,118 @@
 ---
 import Base from "../layouts/Base.astro";
+import { hero, problema, queHacemos, servicios, piloto, cierre, materiales, DEMO_URL } from "../data/contenido";
 ---
 <Base>
-  <section class="contenedor provisional">
-    <p class="eyebrow">Kipu360</p>
-    <h1>Infraestructura de datos ambientales abierta y lista para la inteligencia artificial.</h1>
+  <section id="hero" class="hero on-dark">
+    <div class="contenedor hero__grid">
+      <div>
+        <p class="eyebrow">Kipu360</p>
+        <h1>{hero.titulo}</h1>
+        <p class="lead">{hero.bajada}</p>
+        <div class="botones">
+          <a class="boton" href="/deck/">Ver el deck</a>
+          <a class="boton boton--borde" href="/one-pager/">Ver el one-pager</a>
+        </div>
+      </div>
+      <img class="hero__mapa" src="/brand/peru.svg" alt="" width="608" height="887" />
+    </div>
+  </section>
+
+  <section id="problema" class="seccion seccion--clara">
+    <div class="contenedor problema__grid">
+      <div>
+        <p class="eyebrow">01 · {problema.eyebrow}</p>
+        <h2 class="titulo-doble">{problema.titulo.map((t) => <span>{t}</span>)}</h2>
+        <p>{problema.texto}</p>
+        <blockquote class="cita">
+          <p>«{problema.cita}»</p>
+          <cite>{problema.fuente}</cite>
+        </blockquote>
+      </div>
+      <div>
+        <ul class="nube" aria-label="Instituciones que publican información ambiental">
+          {problema.instituciones.map((i) => <li>{i}</li>)}
+        </ul>
+        <p class="nube__nota">{problema.nota}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="que-hacemos" class="seccion seccion--blanca">
+    <div class="contenedor">
+      <p class="eyebrow">02 · {queHacemos.eyebrow}</p>
+      <h2>{queHacemos.titulo}</h2>
+      <div class="flujo">
+        <ul class="flujo__col flujo__col--origen" aria-label="De dónde viene la información">
+          {queHacemos.origenes.map((o) => <li>{o}</li>)}
+        </ul>
+        <span class="flujo__flecha" aria-hidden="true">→</span>
+        <div class="flujo__nucleo">
+          <span class="marca">KIPU360</span>
+          {queHacemos.verbos.map((v) => <div><strong>{v.verbo}</strong><span>{v.detalle}</span></div>)}
+        </div>
+        <span class="flujo__flecha" aria-hidden="true">→</span>
+        <ul class="flujo__col flujo__col--salida" aria-label="Qué sale">
+          {queHacemos.salidas.map((s) => <li><strong>{s.nombre}</strong><span>{s.detalle}</span></li>)}
+        </ul>
+      </div>
+
+      <h3 class="titulo-doble servicios__titulo">{servicios.titulo.map((t) => <span>{t}</span>)}</h3>
+      <div class="servicios">
+        {servicios.grupos.map((g) => (
+          <div class="servicios__grupo">
+            <h3>{g.nombre}</h3>
+            <ul>{g.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+        <div class="servicios__base">{servicios.base}</div>
+      </div>
+      <p class="servicios__nota">{servicios.nota}</p>
+    </div>
+  </section>
+
+  <section id="piloto" class="seccion on-dark">
+    <div class="contenedor">
+      <p class="eyebrow">03 · {piloto.eyebrow}</p>
+      <h2 class="titulo-doble">{piloto.titulo.map((t) => <span>{t}</span>)}</h2>
+      <p class="lead">{piloto.texto}</p>
+      <ol class="linea">
+        {piloto.pasos.map((p) => (
+          <li class={p.abierto ? "abierto" : ""}>
+            <span class="linea__cuando">{p.cuando}</span>
+            <h3>{p.nombre}</h3>
+            <p>{p.texto}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div class="cierre">
+        <p class="eyebrow">{cierre.eyebrow}</p>
+        <h2>{cierre.titulo}</h2>
+        <p class="lead">{cierre.texto}</p>
+      </div>
+
+      <div class="materiales">
+        {materiales.map((m) => (
+          <article class="tarjeta">
+            <span class="tarjeta__tipo">Material</span>
+            <h3>{m.nombre}</h3>
+            <p>{m.detalle}</p>
+            <div class="tarjeta__acciones">
+              <a class="boton" href={m.href}>Ver {m.nombre.toLowerCase()}</a>
+              <a class="boton boton--borde" href={m.pdf} download>Descargar PDF</a>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="botones">
+        <a class="boton boton--borde" href={DEMO_URL}>Ver la demo →</a>
+      </div>
+    </div>
   </section>
 </Base>
 
 <style>
-  .provisional { padding-block: var(--s-6); }
+  .servicios__titulo { margin-top: var(--s-6); font-size: var(--fs-2); }
+  .cierre { margin-top: var(--s-6); padding-top: var(--s-5); border-top: 1px solid rgb(255 255 255 / 0.25); }
 </style>

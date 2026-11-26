@@ -31,3 +31,8 @@ img { max-width: 100%; height: auto; display: block; }
 
 .skip { position: absolute; left: -999px; }
 .skip:focus { left: var(--s-2); top: var(--s-2); background: var(--blanco); padding: var(--s-1) var(--s-2); z-index: 10; }
+
+@media print {
+  .no-print, .skip { display: none !important; }
+  main { flex: none; }
+}
