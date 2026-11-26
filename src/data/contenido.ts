@@ -177,3 +177,39 @@ export const materiales = [
     pdf: "/one-pager/kipu360-one-pager.pdf",
   },
 ];
+
+// Home de empresa (26-nov, v0.2). Textos de textos/onepager.md y textos/mision-vision-quienes-somos.md.
+export const empresa = {
+  titulo: "Infraestructura para organizar y utilizar la información ambiental y geoespacial.",
+  bajada:
+    "Kipu360 es una empresa peruana de tecnología. Reúne información dispersa sobre el ambiente y el territorio, documenta su procedencia y la convierte en datos que pueden encontrarse, cruzarse y verificarse.",
+  problema:
+    "Para diseñar un proyecto, preparar un informe o sustentar una decisión, los equipos reúnen información de múltiples instituciones, gobiernos locales y regionales, universidades y empresas. Descargan archivos de distintos portales, concilian PDF y hojas de cálculo, y repiten el trabajo en cada proyecto. En ese proceso se pierde tiempo y se vuelve difícil comprobar qué fuente respalda cada resultado.",
+  queHacemos: [
+    "Integramos fuentes públicas y privadas en catálogos documentados y versionados. Cada valor tabular puede rastrearse hasta su archivo, hoja y fila original, y cada corrección queda registrada. Publicamos datos en formatos abiertos que pueden consultarse directamente, sin servidores dedicados para servirlos.",
+    "Las organizaciones usan esos datos con sus propias herramientas, mediante un asistente que cita sus fuentes o a través de sus agentes de IA.",
+  ],
+  estandares:
+    "Diseñamos la infraestructura tomando como referencia estándares del OGC, normas ISO para metadatos y calidad, y prácticas de seguridad de aplicaciones como OWASP ASVS.",
+  dondeSeAplica:
+    "Trabajamos con organizaciones que producen, gestionan o utilizan información ambiental y geoespacial. La infraestructura les permite integrar fuentes, publicar datos, analizarlos y sustentar proyectos y decisiones.",
+  modelo:
+    "Cobramos por diseñar e implementar infraestructura de datos, desarrollar herramientas según las necesidades de cada organización y operar o mantener las soluciones que lo requieran. Los datos públicos permanecen abiertos y gratuitos. Cada cliente conserva el control de sus datos privados.",
+  mision:
+    "Integrar y conectar información ambiental y geoespacial de múltiples fuentes, preservando su procedencia y trazabilidad para facilitar su acceso, análisis y reutilización, y convertirla en conocimiento útil para la toma de decisiones.",
+  vision:
+    "Contribuir a un entorno en el que la información ambiental y geoespacial sea accesible, interoperable y verificable, y pueda aprovecharse de manera segura y eficiente para comprender mejor el territorio, anticipar riesgos y tomar decisiones fundamentadas.",
+  principios: [
+    { nombre: "Trazabilidad y transparencia", texto: "Cada dato conserva el vínculo con su fuente y cada transformación o corrección queda registrada. Ninguna modificación se realiza de forma silenciosa." },
+    { nombre: "Interoperabilidad y apertura", texto: "Estándares abiertos, formatos reutilizables y metodologías documentadas y versionadas." },
+    { nombre: "Control y privacidad", texto: "Los clientes mantienen el control de sus datos privados. No se comparten ni se reutilizan fuera de los fines autorizados." },
+    { nombre: "Calidad y honestidad científica", texto: "Documentamos las limitaciones, incertidumbres y necesidades de revisión de los datos." },
+    { nombre: "Flexibilidad", texto: "Cada organización elige los datos, herramientas y funcionalidades que necesita, sobre una infraestructura común." },
+    { nombre: "Acceso abierto", texto: "Los datos y catálogos públicos se mantienen abiertos y gratuitos." },
+    { nombre: "IA responsable", texto: "Asistentes cuyas respuestas pueden contrastarse con fuentes verificables y cuyas limitaciones son explícitas." },
+  ],
+  descargas: [
+    { nombre: "Presentación", detalle: "El problema, qué hacemos, servicios, arquitectura y cómo empezamos.", pdf: "/deck/kipu360-deck.pdf", archivo: "PDF, 8 páginas" },
+    { nombre: "Resumen ejecutivo", detalle: "Kipu360 en una hoja, para compartir.", pdf: "/one-pager/kipu360-one-pager.pdf", archivo: "PDF, 1 página" },
+  ],
+};
