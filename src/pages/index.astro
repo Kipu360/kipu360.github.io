@@ -31,7 +31,7 @@ const iconos = [
   <section class="franja" aria-label="Estándares y formatos abiertos">
     <div class="contenedor franja__fila">
       <p>Construido sobre estándares abiertos</p>
-      <ul>{arquitectura.formatos.map((f) => <li>{f.nombre}</li>)}</ul>
+      <ul>{arquitectura.formatos.map((f) => <li><img src={f.logo} alt="" width="26" height="26" />{f.nombre}</li>)}</ul>
     </div>
   </section>
 
@@ -201,8 +201,8 @@ const iconos = [
   .franja__fila { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-2) var(--s-4); }
   .franja p { margin: 0; font-weight: 500; color: var(--texto-suave); font-size: var(--fs-0); }
   .franja ul { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4); list-style: none; margin: 0; padding: 0; }
-  .franja li { font-family: var(--font-titulo); font-weight: 700; color: var(--azul-oscuro); font-size: 1.05rem; }
-  .franja img { width: 22px; height: 22px; object-fit: contain; filter: brightness(0); opacity: 0.85; }
+  .franja li { display: inline-flex; align-items: center; gap: 0.55em; font-family: var(--font-titulo); font-weight: 700; color: var(--azul-oscuro); font-size: 1.05rem; }
+  .franja img { width: 26px; height: 26px; object-fit: contain; }
 
   /* Bloques: fondo continuo, separados por espacio */
   .bloque { padding-block: var(--s-6) 0; }
