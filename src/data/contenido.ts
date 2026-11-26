@@ -2,7 +2,7 @@
 // (kipu-360-web/context/piezas/texto/deck.txt, one-pager.txt y textos/*.md).
 // No agregar cifras ni afirmaciones que no estén en esas fuentes.
 
-export const DEMO_URL = "https://kipu360.github.io/environmental-data-explorer/";
+export const DEMO_URL = "https://sammy-carlos.github.io/environmental-data-explorer/";
 export const DEMO_REPO = "https://github.com/Kipu360/environmental-data-explorer";
 export const GITHUB_URL = "https://github.com/Kipu360";
 export const HF_URL = "https://huggingface.co/Kipu360";
