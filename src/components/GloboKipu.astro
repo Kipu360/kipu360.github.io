@@ -142,7 +142,7 @@ const nivel1 = ARBOL.hijos ?? [];
   /* Cuadro del catálogo, al estilo de portolan-sdi.org: árbol mono con conectores de 1 px,
      notas a la derecha, formato en azul y, bajo cada archivo de datos, su dibujo.
      Ocupa el 64 % derecho; el globo calcula su aro para dejar 12 px de aire (ver el script). */
-  .globo__arbol { --conector: color-mix(in srgb, var(--azul-oscuro) 55%, var(--fondo-portada)); position: absolute; left: 36%; right: 0; top: 50%; translate: 0 -50%; padding: 10px 12px; background: var(--fondo-portada); border: 1px solid var(--linea); color: var(--negro); overflow: hidden; opacity: 0; clip-path: inset(0 0 100% 0); transition: opacity 0.5s ease, clip-path 1.1s ease; pointer-events: none; }
+  .globo__arbol { --conector: color-mix(in srgb, var(--azul-oscuro) 55%, var(--fondo-portada)); position: absolute; left: 36%; right: 0; top: 50%; translate: 0 -50%; padding: 10px 12px; background: var(--blanco); border: 1px solid color-mix(in srgb, var(--azul) 28%, transparent); color: var(--negro); overflow: hidden; opacity: 0; clip-path: inset(0 0 100% 0); transition: opacity 0.5s ease, clip-path 1.1s ease; pointer-events: none; }
   .globo.abierto .globo__arbol { opacity: 1; clip-path: inset(0 0 0 0); }
   .arbol, .arbol ul { list-style: none; margin: 0; padding: 0; }
   .arbol { font-family: var(--font-mono); font-size: 0.66rem; line-height: 15px; }
@@ -184,11 +184,16 @@ const nivel1 = ARBOL.hijos ?? [];
   @media (prefers-reduced-motion: reduce) {
     .globo__arbol, .globo__arbol * { transition: none !important; }
   }
+  /* Entre 901 y 1040 px no caben globo y cuadro lado a lado: el globo se desvanece y el cuadro ocupa su lugar. */
+  .globo__lienzo { transition: opacity 0.6s ease; }
   @media (max-width: 1040px) {
-    .globo__arbol { display: none; }
-    .globo.abierto .globo__rotulo { opacity: 1; }
+    .globo__arbol { left: 0; right: 0; }
+    .globo.abierto .globo__lienzo { opacity: 0.08; }
   }
   @media (max-width: 900px) {
+    .globo__arbol { display: none; }
+    .globo.abierto .globo__lienzo { opacity: 1; }
+    .globo.abierto .globo__rotulo { opacity: 1; }
     .globo { justify-self: center; width: min(100%, 240px); order: -1; margin-bottom: var(--s-2); }
     .globo__rotulo { bottom: -8%; font-size: 0.8rem; }
   }
@@ -203,8 +208,9 @@ const nivel1 = ARBOL.hijos ?? [];
     const rotulo = raiz.querySelector<HTMLElement>("[data-rotulo]")!;
     const datos = JSON.parse(raiz.querySelector("[data-puntos]")!.textContent!);
     const arbolEl = raiz.querySelector<HTMLElement>("[data-arbol]")!;
-    // Modo compacto = la tarjeta está oculta por CSS: el globo no se corre y el rótulo resume.
-    const compacto = () => getComputedStyle(arbolEl).display === "none";
+    // Modo compacto (1040 px o menos): el globo no se corre; el cuadro, si se muestra, va encima.
+    const anchoCompacto = matchMedia("(max-width: 1040px)");
+    const compacto = () => anchoCompacto.matches;
     const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const dpr = Math.min(devicePixelRatio || 1, 2);
