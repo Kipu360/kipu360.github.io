@@ -3,7 +3,12 @@
 // estructura de catálogo que proponemos. Es ilustrativo: no hay datos de clientes. Ubicación de
 // los campos de Camisea según en.wikipedia.org/wiki/Camisea_Gas_Project (-11.8387, -72.9503).
 // Idea tomada de la portada de portolan-sdi.org. Los puntos se calculan en la build.
+// El cuadro del catálogo (árbol, mapa con tabla de row groups y pirámide del COG) está adaptado
+// de portolan-sdi.org (Apache-2.0): ver src/lib/catalogo-portolan.ts, NOTICE y
+// LICENSES/portolan-sdi-APACHE-2.0.txt. Cambios en este archivo: árbol y dibujos en HTML y SVG
+// (antes canvas), aparición con transiciones CSS al abrir la tarjeta, colores de Kipu360.
 import { geoContains } from "d3-geo";
+import { ARBOL, MAPA, TABLA, PIRAMIDE, filas, type Nodo } from "../lib/catalogo-portolan";
 import { feature } from "topojson-client";
 import land110 from "world-atlas/land-110m.json";
 import countries50 from "world-atlas/countries-50m.json";
@@ -29,50 +34,100 @@ for (let lat = -18.5; lat <= 0.2; lat += 0.42) {
 }
 const datos = JSON.stringify({ mundo, peru: puntosPeru });
 
-const arbol = [
-  { n: "camisea-ejemplo/", t: "dir", d: 0 },
-  { n: "catalog.json", t: "stac", d: 1, f: "STAC" },
-  { n: "catalogo/", t: "dir", d: 1 },
-  { n: "collection.json", t: "stac", d: 2, f: "STAC" },
-  { n: "README.md", t: "doc", d: 2 },
-  { n: "AGENTS.md", t: "doc", d: 2, nota: "para IA" },
-  { n: "tablas/", t: "dir", d: 1, f: "Parquet" },
-  { n: "estaciones.parquet", t: "pq", d: 2 },
-  { n: "muestreos.parquet", t: "pq", d: 2 },
-  { n: "resultados.parquet", t: "pq", d: 2 },
-  { n: "parametros.parquet", t: "pq", d: 2 },
-  { n: "fuentes.json", t: "doc", d: 1 },
-  { n: "validacion.json", t: "doc", d: 1 },
-];
-// Conectores del árbol (├── └── │), calculados en la build.
-const esUltimo = (i) => {
-  for (let j = i + 1; j < arbol.length; j++) {
-    if (arbol[j].d < arbol[i].d) return true;
-    if (arbol[j].d === arbol[i].d) return false;
-  }
-  return true;
-};
-const filas = arbol.map((a, i) => {
-  let pre = "";
-  for (let nivel = 1; nivel < a.d; nivel++) {
-    let k = i; while (arbol[k].d > nivel) k--;
-    pre += esUltimo(k) ? "    " : "│   ";
-  }
-  if (a.d > 0) pre += esUltimo(i) ? "└── " : "├── ";
-  return { ...a, pre, formato: a.f };
-});
+// Orden de lectura de cada fila: marca el retraso de su fundido, de arriba abajo como en Portolan.
+const orden = filas();
+const num = (n: Nodo) => orden.indexOf(n);
+const nivel1 = ARBOL.hijos ?? [];
 ---
 <div class="globo" data-globo>
   <canvas class="globo__lienzo" width="560" height="560" aria-hidden="true"></canvas>
   <p class="globo__rotulo" data-rotulo aria-live="off"></p>
-  <div class="globo__arbol" data-arbol aria-label="Ejemplo ilustrativo de catálogo Kipu360">
-    <p class="globo__ruta">kipu360.github.io</p>
-    <ul>
-      {filas.map((a) => (
-        <li class={`t-${a.t}`}><span class="pre">{a.pre}</span><span class="nombre">{a.n}</span>{a.nota && <em>{a.nota}</em>}{a.formato && <b>{a.formato}</b>}</li>
-      ))}
+  <div class="globo__arbol" data-arbol role="group" aria-label="Ejemplo ilustrativo de catálogo Kipu360 para Camisea">
+    <ul class="arbol">
+      <li class="nodo nodo--raiz">
+        <span class="fila" style={`--i:${num(ARBOL)}`}><span class="nombre fuerte">{ARBOL.nombre}</span></span>
+        <ul>
+          {nivel1.map((a) => (
+            <li class="nodo">
+              <span class="fila" style={`--i:${num(a)}`}>
+                <span class={`nombre${a.tipo !== "archivo" ? " fuerte" : ""}`}>{a.nombre}</span>
+                {a.formato && <span class="formato">{a.formato}</span>}
+                {a.nota && <span class="nota">{a.nota}</span>}
+              </span>
+              {a.hijos && (
+                <ul>
+                  {a.hijos.map((b) => (
+                    <li class="nodo">
+                      <span class="fila" style={`--i:${num(b)}`}>
+                        <span class={`nombre${b.tipo !== "archivo" ? " fuerte" : ""}`}>{b.nombre}</span>
+                        {b.formato && <span class="formato">{b.formato}</span>}
+                        {b.nota && <span class="nota">{b.nota}</span>}
+                      </span>
+                      {b.dibujo === "parquet" && (
+                        <div class="dibujo dibujo--parquet" style={`--i:${num(b)}`} aria-hidden="true">
+                          <div class="pq-mapa">
+                            <svg viewBox={`0 0 ${MAPA.w} ${MAPA.h}`} preserveAspectRatio="xMinYMid meet">
+                              <defs>
+                                <path id="kq-tierra" d={MAPA.d} />
+                                {MAPA.regiones.map((r, k) => (
+                                  <clipPath id={`kq-region-${k}`}><rect x={r.x} y="-2" width={r.w} height={MAPA.h + 4} /></clipPath>
+                                ))}
+                              </defs>
+                              {MAPA.regiones.map((r, k) => (
+                                <use href="#kq-tierra" class="d-tierra" clip-path={`url(#kq-region-${k})`} fill-opacity={r.tinte} fill-rule="evenodd" />
+                              ))}
+                            </svg>
+                          </div>
+                          <svg class="pq-tabla" viewBox={`0 0 ${TABLA.vw} ${TABLA.vh}`} width={TABLA.vw} height={TABLA.vh}>
+                            <g class="d-fin">
+                              {TABLA.celdas.filter((c) => c.tinte > 0).map((c) => (
+                                <rect class="d-tinte" x={c.x} y={c.y} width={c.w} height={c.h} fill-opacity={c.tinte} />
+                              ))}
+                              <text class="d-etiqueta" x={TABLA.etiquetaX} y={TABLA.etiquetaY}>geometry</text>
+                            </g>
+                            <g class="d-estructura">
+                              {TABLA.celdas.map((c) => (
+                                <rect class="d-borde" x={c.x} y={c.y} width={c.w} height={c.h} />
+                              ))}
+                            </g>
+                          </svg>
+                        </div>
+                      )}
+                      {b.dibujo === "cog" && (
+                        <div class="dibujo dibujo--cog" style={`--i:${num(b)}`} aria-hidden="true">
+                          <svg viewBox={`0 0 ${PIRAMIDE.vw} ${PIRAMIDE.vh}`} width={PIRAMIDE.vw} height={PIRAMIDE.vh}>
+                            <g class="d-estructura">
+                              {PIRAMIDE.aristas.map(([x1, y1, x2, y2]) => (
+                                <line class="d-arista" x1={x1} y1={y1} x2={x2} y2={y2} />
+                              ))}
+                            </g>
+                            {PIRAMIDE.capas.map((c) => (
+                              <g>
+                                <polygon class="d-plano d-estructura" points={c.poligono} />
+                                <path class={`d-pixeles ${c.k === 0 ? "d-lleno" : "d-fin"}`} d={c.pixeles} />
+                                {c.k === 0 && (
+                                  <g class="d-estructura">
+                                    {PIRAMIDE.rejilla.map(([x1, y1, x2, y2]) => (
+                                      <line class="d-rejilla" x1={x1} y1={y1} x2={x2} y2={y2} />
+                                    ))}
+                                  </g>
+                                )}
+                                <polygon class="d-borde d-estructura" points={c.poligono} />
+                              </g>
+                            ))}
+                          </svg>
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </li>
     </ul>
-    <p class="globo__pie">Ejemplo ilustrativo: catálogo STAC y tablas Parquet</p>
+    <p class="globo__pie">Ejemplo ilustrativo</p>
   </div>
   <script type="application/json" data-puntos set:html={datos}></script>
 </div>
@@ -81,24 +136,53 @@ const filas = arbol.map((a, i) => {
   .globo { position: relative; width: min(100%, 520px); aspect-ratio: 1; justify-self: end; }
   .globo__lienzo { width: 100%; height: 100%; display: block; }
   .globo__rotulo { position: absolute; left: 50%; bottom: -3%; transform: translateX(-50%); margin: 0; white-space: nowrap; font-family: var(--font-titulo); font-weight: 700; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--azul-oscuro); transition: opacity 0.6s ease; }
-  .globo__arbol { position: absolute; right: 0; top: 50%; translate: 0 -50%; width: 56%; padding: 12px 12px 10px; border-radius: 0; background: var(--fondo-portada); border: 1px solid var(--linea); color: var(--negro); overflow: hidden; opacity: 0; clip-path: inset(0 0 100% 0); transition: opacity 0.5s ease, clip-path 1.1s ease; pointer-events: none; }
-  .globo.abierto .globo__arbol { opacity: 1; clip-path: inset(0 0 0 0); }
-  .globo__ruta { white-space: nowrap; margin: 0 0 8px; font-family: var(--font-mono); font-size: 0.72rem; color: #74766a; }
-  .globo__arbol ul { list-style: none; margin: 0; padding: 0; font-family: var(--font-mono); font-size: 0.68rem; line-height: 1.5; }
-  .globo__arbol li { display: flex; align-items: baseline; white-space: pre; opacity: 0; transition: opacity 0.35s ease; }
-  .globo.abierto .globo__arbol li { opacity: 1; }
-  .globo__arbol .pre { color: #74766a; }
-  .globo__arbol .nombre { color: #3d3f33; }
-  .t-dir .nombre, .t-pq .nombre, .t-stac .nombre { font-weight: 600; color: #16170f; }
-  .globo__arbol em { font-style: normal; font-size: 0.58rem; color: #74766a; margin-left: auto; padding-left: 10px; }
-  .globo__arbol b { font-weight: 500; font-size: 0.58rem; color: var(--azul); margin-left: auto; padding-left: 10px; }
-  .globo__arbol em + b { margin-left: 8px; }
   .globo.abierto .globo__rotulo { opacity: 0; }
   .globo__rotulo.mina { color: color-mix(in srgb, var(--naranja) 75%, var(--negro)); }
-  .globo__pie { margin: 10px 0 0; padding-top: 8px; border-top: 1px solid var(--linea); font-size: 0.74rem; color: #74766a; }
-  @media (max-width: 1200px) {
-    .globo__arbol ul { font-size: 0.62rem; }
-    .globo__arbol em, .globo__arbol b { display: none; }
+
+  /* Cuadro del catálogo, al estilo de portolan-sdi.org: árbol mono con conectores de 1 px,
+     notas a la derecha, formato en azul y, bajo cada archivo de datos, su dibujo.
+     Ocupa el 64 % derecho; el globo calcula su aro para dejar 12 px de aire (ver el script). */
+  .globo__arbol { --conector: color-mix(in srgb, var(--azul-oscuro) 55%, var(--fondo-portada)); position: absolute; left: 36%; right: 0; top: 50%; translate: 0 -50%; padding: 10px 12px; background: var(--fondo-portada); border: 1px solid var(--linea); color: var(--negro); overflow: hidden; opacity: 0; clip-path: inset(0 0 100% 0); transition: opacity 0.5s ease, clip-path 1.1s ease; pointer-events: none; }
+  .globo.abierto .globo__arbol { opacity: 1; clip-path: inset(0 0 0 0); }
+  .arbol, .arbol ul { list-style: none; margin: 0; padding: 0; }
+  .arbol { font-family: var(--font-mono); font-size: 0.66rem; line-height: 15px; }
+  .nodo { position: relative; }
+  .arbol ul .nodo { padding-left: 14px; }
+  .arbol ul .nodo::before { content: ""; position: absolute; left: 4px; top: 0; width: 6px; height: 8px; border-left: 1px solid var(--conector); border-bottom: 1px solid var(--conector); }
+  .arbol ul .nodo:not(:last-child)::after { content: ""; position: absolute; left: 4px; top: 0; bottom: 0; border-left: 1px solid var(--conector); }
+  .fila { display: flex; align-items: baseline; gap: 8px; height: 15px; white-space: nowrap; opacity: 0; transition: opacity 0.35s ease; transition-delay: calc(var(--i) * 80ms + 150ms); }
+  .nombre { color: #4a4747; }
+  .fuerte { font-weight: 600; color: var(--negro); }
+  .formato, .nota { font-size: 0.56rem; opacity: 0; transition: opacity 0.4s ease; transition-delay: calc(var(--i) * 80ms + 450ms); }
+  .formato { color: var(--azul-oscuro); }
+  .nota { margin-left: auto; color: #7a7774; }
+  .globo.abierto .fila, .globo.abierto .formato, .globo.abierto .nota { opacity: 1; }
+
+  /* Dibujos: el mapa se descubre de oeste a este; tabla y planos, luego tintes y vistas generales. */
+  .dibujo { margin: 3px 0 7px 2px; }
+  .dibujo svg { display: block; overflow: visible; }
+  .dibujo--parquet { display: flex; align-items: center; gap: 10px; }
+  .pq-mapa { flex: 1 1 auto; min-width: 0; clip-path: inset(0 100% 0 0); transition: clip-path 0.9s ease; transition-delay: calc(var(--i) * 80ms + 300ms); }
+  .pq-mapa svg { width: 100%; height: auto; aspect-ratio: 360 / 135; }
+  .pq-tabla { flex: 0 0 auto; width: 110px; height: auto; }
+  .dibujo--cog svg { width: min(100%, 190px); height: auto; }
+  .globo.abierto .pq-mapa { clip-path: inset(-2px -2px -2px -2px); }
+  .d-tierra { fill: var(--azul); stroke: var(--azul-oscuro); stroke-width: 0.8; }
+  .d-tinte { fill: var(--azul); }
+  .d-borde { fill: none; stroke: var(--azul-oscuro); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .d-etiqueta { font-family: var(--font-mono); font-size: 10px; fill: var(--azul-oscuro); }
+  .d-plano { fill: var(--fondo-portada); }
+  .d-pixeles { fill: var(--azul); fill-opacity: 0.55; }
+  .d-arista { stroke: #c9d3ea; stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .d-rejilla { stroke: var(--azul-oscuro); stroke-opacity: 0.4; stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .d-estructura, .d-lleno, .d-fin { opacity: 0; transition: opacity 0.5s ease; }
+  .d-lleno { transition-delay: calc(var(--i) * 80ms + 350ms); }
+  .d-estructura { transition-delay: calc(var(--i) * 80ms + 650ms); }
+  .d-fin { transition-delay: calc(var(--i) * 80ms + 1050ms); }
+  .globo.abierto .d-estructura, .globo.abierto .d-lleno, .globo.abierto .d-fin { opacity: 1; }
+  .globo__pie { margin: 8px 0 0; padding-top: 6px; border-top: 1px solid var(--linea); font-family: var(--font-mono); font-size: 0.62rem; line-height: 1.3; color: #7a7774; }
+  @media (prefers-reduced-motion: reduce) {
+    .globo__arbol, .globo__arbol * { transition: none !important; }
   }
   @media (max-width: 1040px) {
     .globo__arbol { display: none; }
@@ -106,12 +190,7 @@ const filas = arbol.map((a, i) => {
   }
   @media (max-width: 900px) {
     .globo { justify-self: center; width: min(100%, 240px); order: -1; margin-bottom: var(--s-2); }
-    .globo__arbol { display: none; }
     .globo__rotulo { bottom: -8%; font-size: 0.8rem; }
-    .globo.abierto .globo__rotulo { opacity: 1; }
-    .globo__arbol ul { font-size: 0.62rem; line-height: 1.45; }
-    .globo__pie, .globo__ruta { font-size: 0.66rem; }
-    .globo__arbol em, .globo__arbol b { display: none; }
   }
 </style>
 
@@ -123,7 +202,6 @@ const filas = arbol.map((a, i) => {
     const ctx = lienzo.getContext("2d")!;
     const rotulo = raiz.querySelector<HTMLElement>("[data-rotulo]")!;
     const datos = JSON.parse(raiz.querySelector("[data-puntos]")!.textContent!);
-    const items = [...raiz.querySelectorAll<HTMLElement>(".globo__arbol li")];
     const arbolEl = raiz.querySelector<HTMLElement>("[data-arbol]")!;
     // Modo compacto = la tarjeta está oculta por CSS: el globo no se corre y el rótulo resume.
     const compacto = () => getComputedStyle(arbolEl).display === "none";
@@ -131,8 +209,12 @@ const filas = arbol.map((a, i) => {
 
     const dpr = Math.min(devicePixelRatio || 1, 2);
     let lado = 0;
+    // Borde izquierdo de la tarjeta dentro del globo: el aro abierto se detiene 12 px antes.
+    let bordeTarjeta = 0;
+    const AIRE = 12;
     const ajustar = () => {
       lado = lienzo.clientWidth;
+      bordeTarjeta = arbolEl.offsetLeft;
       lienzo.width = lado * dpr;
       lienzo.height = lado * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -168,10 +250,11 @@ const filas = arbol.map((a, i) => {
 
     function dibujar(s: ReturnType<typeof estado>) {
       const abre = compacto() ? 0 : s.corrido || 0;
-      // Al abrir, el globo va a la izquierda (aro de 0,035 a 0,405 del ancho) y la tarjeta ocupa el 56 % derecho,
-      // con unos 16 px de aire entre los dos.
-      const radio = lado * (0.43 - 0.252 * abre);
-      const cx = lado * (0.5 - 0.28 * abre);
+      // Al abrir, el globo va a la izquierda: su aro (radio * 1,04, trazo de 1 px) va de 6 px
+      // hasta AIRE px antes de la tarjeta, que ocupa el 64 % derecho.
+      const aroAbierto = Math.max((bordeTarjeta - AIRE - 6 - 0.5) / 2, 10);
+      const radio = lado * 0.43 * (1 - abre) + (aroAbierto / 1.04) * abre;
+      const cx = lado * 0.5 * (1 - abre) + (6 + aroAbierto) * abre;
       proyeccion.scale(radio * s.zoom).translate([cx, lado / 2]).rotate([-s.centro[0], -s.centro[1]]);
       ctx.clearRect(0, 0, lado, lado);
       // Todo se dibuja dentro de un círculo fijo: al acercarse se ve como una lupa, no un cuadrado.
@@ -229,7 +312,14 @@ const filas = arbol.map((a, i) => {
       if (rotulo.textContent !== texto) rotulo.textContent = texto;
       rotulo.classList.toggle("mina", s.mina > 0.5);
       raiz.classList.toggle("abierto", s.abierto);
-      if (s.abierto) items.forEach((li, i) => (li.style.transitionDelay = `${i * 70}ms`));
+    }
+
+    // ?globo-t=<segundos> congela un instante del ciclo (para capturas de validación).
+    const fijo = new URLSearchParams(location.search).get("globo-t");
+    if (fijo !== null && Number.isFinite(Number(fijo)) && fijo.trim() !== "") {
+      dibujar(estado(Number(fijo) % CICLO));
+      addEventListener("resize", () => dibujar(estado(Number(fijo) % CICLO)));
+      continue;
     }
 
     if (quieto) {

@@ -1,0 +1,31 @@
+Kipu360 web
+Avisos de terceros
+
+## Cuadro del catálogo en la animación de la portada
+
+El cuadro del catálogo que se abre al final de la animación del globo (árbol
+de archivos con conectores, mapa de contornos con tabla de row groups bajo el
+GeoParquet y pirámide de rásters bajo el COG) está adaptado de la portada de
+portolan-sdi.org:
+
+    https://github.com/portolan-sdi/portolan-sdi.org
+    Licencia Apache-2.0. Texto completo en LICENSES/portolan-sdi-APACHE-2.0.txt
+
+Archivos adaptados:
+
+- src/lib/catalogo-portolan.ts  (de src/components/home/hero-points.ts y
+  hero-renderer.ts: árbol, geometría del mapa, la tabla y la pirámide)
+- src/components/GloboKipu.astro (marcado HTML y SVG del cuadro y su aparición)
+- src/data/hero-world.json       (copia sin cambios de public/data/hero-world.json)
+
+Cada archivo indica en su cabecera los cambios hechos. En resumen: de canvas
+2D en React a SVG calculado en la build, colores y tipografía de Kipu360 y un
+árbol de ejemplo ilustrativo de Kipu360 en torno a Camisea. El globo animado
+es propio de Kipu360 y solo toma la idea de la portada de Portolan.
+
+src/data/hero-world.json deriva, según el repositorio de origen, de los
+polígonos de tierra de Natural Earth (ne_50m_land), de dominio público:
+https://www.naturalearthdata.com/about/terms-of-use/
+
+La ubicación de Camisea (lon -72.9503, lat -11.8387) se toma de
+https://en.wikipedia.org/wiki/Camisea_Gas_Project

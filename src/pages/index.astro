@@ -173,6 +173,8 @@ const iconos = [
   .nota-caja strong { font-family: var(--font-titulo); color: var(--azul); }
   .nota-caja p { margin: 0; font-size: 1rem; max-width: none; }
   .portada__grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--s-5); align-items: center; }
+  /* Con el cuadro del catálogo visible (>1040 px), el globo pide 440 a 520 px para que el árbol quepa sin cortar notas. */
+  @media (min-width: 1041px) { .portada__grid { grid-template-columns: minmax(0, 1fr) clamp(440px, 36vw, 520px); gap: var(--s-4); } }
   .portada h1 { color: var(--azul-oscuro); letter-spacing: -0.02em; font-size: clamp(2.1rem, 1.4rem + 2.6vw, 3.3rem); max-width: 21ch; }
   .portada .lead { color: var(--negro); max-width: 50ch; }
   .portada .boton--borde { background: transparent; color: var(--blanco); border-color: rgb(255 255 255 / 0.7); }
