@@ -40,7 +40,7 @@
 
 /* Problema: nube de instituciones */
 .problema__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); align-items: center; }
-.cita { margin: var(--s-4) 0 0; padding-left: var(--s-3); border-left: 4px solid var(--naranja); }
+.cita { margin: var(--s-4) 0 0; padding-left: var(--s-3); border-left: 4px solid var(--azul); }
 .cita p { font-family: var(--font-titulo); font-weight: 500; font-size: 1.3rem; line-height: 1.35; color: var(--azul-oscuro); margin-bottom: var(--s-1); }
 .cita cite { font-style: normal; font-size: var(--fs-0); color: var(--texto-suave); }
 .nube { display: flex; flex-wrap: wrap; gap: var(--s-2); list-style: none; margin: 0; padding: 0; }

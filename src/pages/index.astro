@@ -21,24 +21,17 @@ const iconos = [
           <a class="boton" href="#que-hacemos">Qué hacemos</a>
         </div>
       </div>
-      <div class="ficha" aria-label="Ejemplo de trazabilidad de un dato">
-        <div class="ficha__cabeza">
-          <span class="ficha__punto"></span>
-          <strong>{h.ficha.titulo}</strong>
-        </div>
-        <dl>
-          {h.ficha.filas.map((f) => <div><dt>{f.campo}</dt><dd>{f.valor}</dd></div>)}
-        </dl>
-        <ul class="ficha__chips">{h.ficha.chips.map((c) => <li>{c}</li>)}</ul>
-      </div>
+      <figure class="portada__fig">
+        <img class="portada__mapa" src="/brand/peru.svg" alt="Mapa del Perú por regiones" width="608" height="887" />
+        <figcaption>Perú, por regiones</figcaption>
+      </figure>
     </div>
-    <img class="portada__mapa" src="/brand/peru.svg" alt="" width="608" height="887" />
   </section>
 
   <section class="franja" aria-label="Estándares y formatos abiertos">
     <div class="contenedor franja__fila">
       <p>Construido sobre estándares abiertos</p>
-      <ul>{arquitectura.formatos.map((f) => <li><img src={f.logo} alt="" width="22" height="22" />{f.nombre}</li>)}</ul>
+      <ul>{arquitectura.formatos.map((f) => <li>{f.nombre}</li>)}</ul>
     </div>
   </section>
 
@@ -61,10 +54,23 @@ const iconos = [
 
   <section id="que-hacemos" class="bloque">
     <div class="contenedor">
-      <div class="encabezado">
-        <p class="eyebrow">Qué hacemos</p>
-        <h2>Un solo lugar para toda la información ambiental del Perú.</h2>
-        <p>{e.queHacemos[0]}</p>
+      <div class="qh">
+        <div class="encabezado">
+          <p class="eyebrow">Qué hacemos</p>
+          <h2>Un solo lugar para toda la información ambiental del Perú.</h2>
+          <p>{e.queHacemos[0]}</p>
+        </div>
+        <div class="ficha" aria-label="Ejemplo de trazabilidad de un dato">
+          <div class="ficha__cabeza">
+            <span class="ficha__punto"></span>
+            <strong>{h.ficha.titulo}</strong>
+          </div>
+          <dl>
+            {h.ficha.filas.map((f) => <div><dt>{f.campo}</dt><dd>{f.valor}</dd></div>)}
+          </dl>
+          <ul class="ficha__chips">{h.ficha.chips.map((c) => <li>{c}</li>)}</ul>
+        </div>
+
       </div>
       <div class="bento">
         {onePager.queHacemos.map((q, i) => (
@@ -84,15 +90,14 @@ const iconos = [
           <p class="nota">{servicios.nota}</p>
         </article>
       </div>
-      <p class="estandares">{e.estandares}</p>
+      <aside class="nota-caja"><strong>Estándares</strong><p>{e.estandares}</p></aside>
     </div>
   </section>
 
   <section id="como-trabajamos" class="bloque bloque--oscuro on-dark">
     <div class="contenedor">
-      <div class="encabezado">
-        <p class="eyebrow">Cómo trabajamos</p>
-        <h2>{piloto.titulo.join(" ")}</h2>
+      <div class="encabezado encabezado--ancho">
+        <div><p class="eyebrow">Cómo trabajamos</p><h2>{piloto.titulo.join(" ")}</h2></div>
         <p>{piloto.texto} Sus datos son suyos y no se usan para entrenar modelos.</p>
       </div>
       <ol class="linea">
@@ -109,15 +114,14 @@ const iconos = [
 
   <section id="para-quien" class="bloque">
     <div class="contenedor">
-      <div class="encabezado">
-        <p class="eyebrow">Para quién</p>
-        <h2>Organizaciones que trabajan con información del territorio.</h2>
+      <div class="encabezado encabezado--ancho">
+        <div><p class="eyebrow">Para quién</p><h2>Organizaciones que trabajan con información del territorio.</h2></div>
         <p>{e.dondeSeAplica}</p>
       </div>
       <div class="tres">
         {onePager.paraQuien.map((p) => <article class="tarjeta-b"><h3>{p.nombre}</h3><p>{p.texto}</p></article>)}
       </div>
-      <p class="estandares">{e.modelo}</p>
+      <aside class="nota-caja"><strong>Modelo de negocio</strong><p>{e.modelo}</p></aside>
     </div>
   </section>
 
@@ -125,19 +129,13 @@ const iconos = [
     <div class="contenedor">
       <p class="eyebrow">Nosotros</p>
       <div class="nosotros">
-        <div>
-          <h2>Misión</h2>
-          <p>{e.mision}</p>
-          <h2 class="nosotros__vision">Visión</h2>
-          <p>{e.vision}</p>
-        </div>
-        <div>
-          <h2>Principios</h2>
-          <ul class="principios">
-            {e.principios.map((p) => <li><strong>{p.nombre}</strong>{p.texto}</li>)}
-          </ul>
-        </div>
+        <div><h2>Misión</h2><p>{e.mision}</p></div>
+        <div><h2>Visión</h2><p>{e.vision}</p></div>
       </div>
+      <h2 class="principios__titulo">Principios</h2>
+      <ul class="principios">
+        {e.principios.map((p) => <li><strong>{p.nombre}</strong>{p.texto}</li>)}
+      </ul>
     </div>
   </section>
 
@@ -167,7 +165,15 @@ const iconos = [
 
 <style>
   /* Portada */
-  .portada { position: relative; overflow: hidden; background: var(--azul-oscuro); color: var(--blanco); padding-block: var(--s-6); }
+  .portada { position: relative; overflow: hidden; background: var(--azul-oscuro); color: var(--blanco); padding-block: var(--s-5); }
+  .portada__fig { margin: 0; justify-self: end; text-align: center; }
+  .portada__fig figcaption { margin-top: var(--s-1); font-family: var(--font-titulo); font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cian); }
+  .encabezado--ancho { max-width: none; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); align-items: end; }
+  .encabezado--ancho h2 { margin: 0; }
+  .encabezado--ancho > p { margin: 0; max-width: none; }
+  .nota-caja { margin-top: var(--s-4); display: grid; grid-template-columns: 12rem 1fr; gap: var(--s-3); padding: var(--s-3); border-radius: 14px; background: var(--blanco); border: 1px solid var(--linea); }
+  .nota-caja strong { font-family: var(--font-titulo); color: var(--azul); }
+  .nota-caja p { margin: 0; font-size: 1rem; max-width: none; }
   .portada__grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--s-5); align-items: center; }
   .portada h1 { color: var(--blanco); font-size: clamp(2.1rem, 1.4rem + 2.6vw, 3.3rem); max-width: 21ch; }
   .portada .lead { color: var(--blanco); opacity: 0.92; max-width: 50ch; }
@@ -175,7 +181,10 @@ const iconos = [
   .portada .boton:hover { background: var(--blanco); border-color: var(--blanco); }
   .portada .boton--borde { background: transparent; color: var(--blanco); border-color: rgb(255 255 255 / 0.7); }
   .portada .boton--borde:hover { background: var(--blanco); color: var(--azul-oscuro); }
-  .portada__mapa { position: absolute; right: -4%; top: -10%; height: 125%; width: auto; opacity: 0.16; pointer-events: none; }
+  .portada__mapa { width: min(100%, 380px); height: auto; filter: drop-shadow(0 30px 40px rgb(0 0 0 / 0.35)); }
+  .qh { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--s-5); align-items: center; margin-bottom: var(--s-4); }
+  .qh .encabezado { margin-bottom: 0; }
+  .ficha { border: 1px solid var(--linea); box-shadow: 0 30px 60px -40px rgb(8 71 144 / 0.5); }
 
   .ficha { background: var(--blanco); color: var(--negro); border-radius: 18px; padding: var(--s-3); box-shadow: 0 40px 80px -40px rgb(0 0 0 / 0.6); }
   .ficha__cabeza { display: flex; align-items: center; gap: 0.6em; padding-bottom: var(--s-2); border-bottom: 1px solid var(--linea); font-family: var(--font-titulo); color: var(--azul-oscuro); }
@@ -192,7 +201,7 @@ const iconos = [
   .franja__fila { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-2) var(--s-4); }
   .franja p { margin: 0; font-weight: 500; color: var(--texto-suave); font-size: var(--fs-0); }
   .franja ul { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4); list-style: none; margin: 0; padding: 0; }
-  .franja li { display: inline-flex; align-items: center; gap: 0.5em; font-family: var(--font-titulo); font-weight: 700; color: var(--negro); }
+  .franja li { font-family: var(--font-titulo); font-weight: 700; color: var(--azul-oscuro); font-size: 1.05rem; }
   .franja img { width: 22px; height: 22px; object-fit: contain; filter: brightness(0); opacity: 0.85; }
 
   /* Bloques: fondo continuo, separados por espacio */
@@ -204,7 +213,8 @@ const iconos = [
 
   .problema { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); align-items: start; }
   .fuentes { display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: var(--s-1); list-style: none; margin: 0 0 var(--s-3); padding: 0; }
-  .fuentes li { font-family: var(--font-titulo); font-weight: 500; font-size: 0.95rem; text-align: center; padding: 0.8em 0.5em; border: 1.5px dashed color-mix(in srgb, var(--azul-oscuro) 40%, transparent); border-radius: 10px; background: var(--blanco); color: var(--azul-oscuro); }
+  .fuentes { grid-auto-rows: 1fr; }
+  .fuentes li { display: flex; align-items: center; justify-content: center; font-family: var(--font-titulo); font-weight: 500; font-size: 1.02rem; text-align: center; padding: 0.8em 0.5em; border: 1.5px dashed color-mix(in srgb, var(--azul-oscuro) 40%, transparent); border-radius: 10px; background: var(--blanco); color: var(--azul-oscuro); }
 
   .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-3); }
   .tarjeta-b { background: var(--blanco); border: 1px solid var(--linea); border-radius: 18px; padding: var(--s-4) var(--s-3); }
@@ -222,9 +232,10 @@ const iconos = [
   .tres .tarjeta-b { background: none; border: 0; border-top: 3px solid var(--azul); border-radius: 0; padding: var(--s-2) 0 0; }
   .on-dark .encabezado p { opacity: 0.92; }
 
-  .nosotros { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: var(--s-5); }
+  .nosotros { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+  .principios__titulo { margin-top: var(--s-5); }
   .nosotros__vision { margin-top: var(--s-4); }
-  .principios { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); }
+  .principios { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-4) var(--s-3); }
   .principios li { padding-left: var(--s-2); border-left: 3px solid var(--azul); font-size: 1rem; color: var(--texto-suave); }
   .principios strong { display: block; margin-bottom: 0.2em; }
   .principios strong { color: var(--negro); font-family: var(--font-titulo); }
@@ -236,16 +247,20 @@ const iconos = [
   .descarga { display: flex; justify-content: space-between; align-items: center; gap: var(--s-2); padding: var(--s-2) var(--s-3); border-radius: 14px; background: var(--blanco); color: var(--azul-oscuro); text-decoration: none; transition: transform 0.15s ease; }
   .descarga:hover { transform: translateX(4px); }
   .descarga__nombre { font-family: var(--font-titulo); font-weight: 700; font-size: 1.2rem; }
-  .descarga__archivo { font-size: 0.9rem; color: var(--texto-suave); }
+  .descarga__archivo { font-size: 0.9rem; color: var(--texto-suave); white-space: nowrap; }
   .descarga__archivo::after { content: "  ↓"; color: var(--azul); font-weight: 700; }
   .cta__enlaces { display: flex; gap: var(--s-3); padding-top: var(--s-1); }
   .cta__enlaces a { color: var(--blanco); font-family: var(--font-titulo); font-weight: 700; }
 
   @media (max-width: 900px) {
     .portada__grid, .problema, .nosotros, .cta { grid-template-columns: 1fr; }
-    .bento, .tres, .principios { grid-template-columns: 1fr; }
+    .bento, .tres { grid-template-columns: 1fr; }
     .servicios-b { grid-template-columns: 1fr 1fr; }
-    .portada__mapa { height: 70%; top: auto; bottom: -5%; right: -25%; }
+    .portada__fig { justify-self: center; }
+    .portada__mapa { width: 200px; }
+    .encabezado--ancho, .nota-caja { grid-template-columns: 1fr; gap: var(--s-2); }
+    .principios { grid-template-columns: 1fr !important; }
+    .qh { grid-template-columns: 1fr; }
     .cta { padding: var(--s-4) var(--s-3); }
   }
   @media (max-width: 480px) {
