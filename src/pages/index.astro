@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import GloboKipu from "../components/GloboKipu.astro";
 import { empresa as e, portada as h, problema, onePager, servicios, piloto, arquitectura, DEMO_URL, GITHUB_URL, HF_URL } from "../data/contenido";
 
 const iconos = [
@@ -21,10 +22,7 @@ const iconos = [
           <a class="boton" href="#que-hacemos">Qué hacemos</a>
         </div>
       </div>
-      <figure class="portada__fig">
-        <img class="portada__mapa" src="/brand/peru.svg" alt="Mapa del Perú por regiones" width="608" height="887" />
-        <figcaption>Perú, por regiones</figcaption>
-      </figure>
+      <GloboKipu />
     </div>
   </section>
 
@@ -253,11 +251,10 @@ const iconos = [
   .cta__enlaces a { color: var(--blanco); font-family: var(--font-titulo); font-weight: 700; }
 
   @media (max-width: 900px) {
+    .portada { padding-block: var(--s-3) var(--s-5); }
     .portada__grid, .problema, .nosotros, .cta { grid-template-columns: 1fr; }
     .bento, .tres { grid-template-columns: 1fr; }
     .servicios-b { grid-template-columns: 1fr 1fr; }
-    .portada__fig { justify-self: center; }
-    .portada__mapa { width: 200px; }
     .encabezado--ancho, .nota-caja { grid-template-columns: 1fr; gap: var(--s-2); }
     .principios { grid-template-columns: 1fr !important; }
     .qh { grid-template-columns: 1fr; }
