@@ -197,7 +197,7 @@ export const empresa = {
   dondeSeAplica:
     "Trabajamos con organizaciones que producen, gestionan o utilizan información ambiental y geoespacial. La infraestructura les permite integrar fuentes, publicar datos, analizarlos y sustentar proyectos y decisiones.",
   modelo:
-    "Cobramos por diseñar e implementar infraestructura de datos, desarrollar herramientas según las necesidades de cada organización y operar o mantener las soluciones que lo requieran. Los datos públicos permanecen abiertos y gratuitos. Cada cliente conserva el control de sus datos privados.",
+    "Ofrecemos el diseño e implementación de infraestructura de datos, el desarrollo de herramientas según las necesidades de cada organización y la operación o mantenimiento de las soluciones que lo requieran. Los datos públicos permanecen abiertos y gratuitos. Cada cliente conserva el control de sus datos privados.",
   mision:
     "Integrar y conectar información ambiental y geoespacial de múltiples fuentes, preservando su procedencia y trazabilidad para facilitar su acceso, análisis y reutilización, y convertirla en conocimiento útil para la toma de decisiones.",
   vision:
