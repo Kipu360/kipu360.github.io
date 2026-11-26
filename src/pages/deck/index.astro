@@ -137,13 +137,10 @@ const pdf = "/deck/kipu360-deck.pdf";
   .barra__titulo small { font-weight: 500; font-size: 0.55em; color: var(--texto-suave); }
   .barra--fin { padding-block: var(--s-5); text-align: center; }
   .barra--fin .barra__fila { justify-content: center; }
-  .lamina { min-height: min(100vh, 56.25vw + 2rem); display: flex; align-items: center; padding-block: var(--s-5); position: relative; overflow: hidden; }
-  .laminas { counter-reset: lamina; }
-  .lamina { counter-increment: lamina; border-top: 1px solid var(--linea); }
-  .lamina::after { content: counter(lamina) " / 8"; position: absolute; right: var(--s-3); bottom: var(--s-2); font-family: var(--font-titulo); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.06em; color: var(--texto-suave); }
-  .on-dark.lamina::after { color: var(--cian); }
+  /* En pantalla es una página normal con secciones; solo el PDF se arma como láminas 16:9. */
+  .lamina { padding-block: var(--s-6); position: relative; overflow: hidden; }
+  .lamina__logo { display: none; }
   .lamina__cuerpo { width: min(100% - 2 * var(--s-3), var(--ancho)); margin-inline: auto; }
-  .lamina__logo { height: 56px; width: auto; margin-bottom: var(--s-4); }
   .lamina--hero .hero__mapa { width: min(100%, 380px); }
   .lamina__cierre { margin-top: var(--s-4); font-family: var(--font-titulo); font-weight: 500; font-size: 1.25rem; }
   .lamina__detalle { margin-top: var(--s-3); max-width: 70ch; }
@@ -154,7 +151,8 @@ const pdf = "/deck/kipu360-deck.pdf";
     @page { size: 1280px 720px; margin: 0; }
     html, body { background: var(--piel); }
     body { display: block; min-height: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .lamina { width: 1280px; height: 720px; min-height: 0; padding-block: 48px; break-after: page; page-break-after: always; }
+    .lamina__logo { display: block; height: 56px; width: auto; margin-bottom: var(--s-4); }
+    .lamina { display: flex; align-items: center; width: 1280px; height: 720px; min-height: 0; padding-block: 48px; break-after: page; page-break-after: always; }
     .lamina:last-child { break-after: auto; page-break-after: auto; }
     .lamina__cuerpo { width: 1140px; }
     h1 { font-size: 52px; }
@@ -162,7 +160,7 @@ const pdf = "/deck/kipu360-deck.pdf";
     .lamina__grande { font-size: 52px; }
     .lead { font-size: 19px; }
     .hero__grid { grid-template-columns: 1.25fr 0.75fr !important; }
-    .hero__mapa { position: static !important; width: 330px !important; opacity: 0.95 !important; }
+    .hero__mapa { display: block !important; position: static !important; width: 330px !important; opacity: 0.95 !important; }
     .problema__grid { grid-template-columns: 1fr 1fr !important; }
     .flujo { grid-template-columns: 1fr auto 1.2fr auto 1fr !important; }
     .flujo__flecha { transform: none !important; }
