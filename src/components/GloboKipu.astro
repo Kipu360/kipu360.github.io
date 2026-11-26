@@ -190,11 +190,10 @@ const nivel1 = ARBOL.hijos ?? [];
     .globo__arbol { left: 0; right: 0; }
     .globo.abierto .globo__lienzo { opacity: 0.08; }
   }
+  /* Celular: el globo crece a 330 px y, al abrir, el cuadro ocupa su lugar (como en 901-1040 px).
+     El margen vertical fijo deja sitio al cuadro, que es más alto que el globo: el texto no salta. */
   @media (max-width: 900px) {
-    .globo__arbol { display: none; }
-    .globo.abierto .globo__lienzo { opacity: 1; }
-    .globo.abierto .globo__rotulo { opacity: 1; }
-    .globo { justify-self: center; width: min(100%, 240px); order: -1; margin-bottom: var(--s-2); }
+    .globo { justify-self: center; width: min(100%, 330px); order: -1; margin-block: 40px calc(40px + var(--s-2)); }
     .globo__rotulo { bottom: -8%; font-size: 0.8rem; }
   }
 </style>
