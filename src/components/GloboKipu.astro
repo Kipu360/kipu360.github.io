@@ -81,21 +81,29 @@ const filas = arbol.map((a, i) => {
   .globo { position: relative; width: min(100%, 520px); aspect-ratio: 1; justify-self: end; }
   .globo__lienzo { width: 100%; height: 100%; display: block; }
   .globo__rotulo { position: absolute; left: 50%; bottom: -3%; transform: translateX(-50%); margin: 0; white-space: nowrap; font-family: var(--font-titulo); font-weight: 700; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--azul-oscuro); transition: opacity 0.6s ease; }
-  .globo__arbol { position: absolute; right: 0; top: 50%; translate: 0 -50%; width: 60%; padding: 14px 16px 12px; border-radius: 0; background: var(--fondo-portada); border: 1px solid var(--linea); color: var(--negro); overflow: hidden; opacity: 0; clip-path: inset(0 0 100% 0); transition: opacity 0.5s ease, clip-path 1.1s ease; pointer-events: none; }
+  .globo__arbol { position: absolute; right: 0; top: 50%; translate: 0 -50%; width: 56%; padding: 12px 12px 10px; border-radius: 0; background: var(--fondo-portada); border: 1px solid var(--linea); color: var(--negro); overflow: hidden; opacity: 0; clip-path: inset(0 0 100% 0); transition: opacity 0.5s ease, clip-path 1.1s ease; pointer-events: none; }
   .globo.abierto .globo__arbol { opacity: 1; clip-path: inset(0 0 0 0); }
   .globo__ruta { white-space: nowrap; margin: 0 0 8px; font-family: var(--font-mono); font-size: 0.72rem; color: #74766a; }
-  .globo__arbol ul { list-style: none; margin: 0; padding: 0; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.4; }
+  .globo__arbol ul { list-style: none; margin: 0; padding: 0; font-family: var(--font-mono); font-size: 0.68rem; line-height: 1.5; }
   .globo__arbol li { display: flex; align-items: baseline; white-space: pre; opacity: 0; transition: opacity 0.35s ease; }
   .globo.abierto .globo__arbol li { opacity: 1; }
   .globo__arbol .pre { color: #74766a; }
   .globo__arbol .nombre { color: #3d3f33; }
   .t-dir .nombre, .t-pq .nombre, .t-stac .nombre { font-weight: 600; color: #16170f; }
-  .globo__arbol em { font-style: normal; font-size: 0.68rem; color: #74766a; margin-left: auto; padding-left: 10px; }
-  .globo__arbol b { font-weight: 500; font-size: 0.68rem; color: var(--azul); margin-left: auto; padding-left: 10px; }
+  .globo__arbol em { font-style: normal; font-size: 0.58rem; color: #74766a; margin-left: auto; padding-left: 10px; }
+  .globo__arbol b { font-weight: 500; font-size: 0.58rem; color: var(--azul); margin-left: auto; padding-left: 10px; }
   .globo__arbol em + b { margin-left: 8px; }
   .globo.abierto .globo__rotulo { opacity: 0; }
   .globo__rotulo.mina { color: color-mix(in srgb, var(--naranja) 75%, var(--negro)); }
   .globo__pie { margin: 10px 0 0; padding-top: 8px; border-top: 1px solid var(--linea); font-size: 0.74rem; color: #74766a; }
+  @media (max-width: 1200px) {
+    .globo__arbol ul { font-size: 0.62rem; }
+    .globo__arbol em, .globo__arbol b { display: none; }
+  }
+  @media (max-width: 1040px) {
+    .globo__arbol { display: none; }
+    .globo.abierto .globo__rotulo { opacity: 1; }
+  }
   @media (max-width: 900px) {
     .globo { justify-self: center; width: min(100%, 240px); order: -1; margin-bottom: var(--s-2); }
     .globo__arbol { display: none; }
@@ -116,6 +124,9 @@ const filas = arbol.map((a, i) => {
     const rotulo = raiz.querySelector<HTMLElement>("[data-rotulo]")!;
     const datos = JSON.parse(raiz.querySelector("[data-puntos]")!.textContent!);
     const items = [...raiz.querySelectorAll<HTMLElement>(".globo__arbol li")];
+    const arbolEl = raiz.querySelector<HTMLElement>("[data-arbol]")!;
+    // Modo compacto = la tarjeta está oculta por CSS: el globo no se corre y el rótulo resume.
+    const compacto = () => getComputedStyle(arbolEl).display === "none";
     const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const dpr = Math.min(devicePixelRatio || 1, 2);
@@ -156,9 +167,11 @@ const filas = arbol.map((a, i) => {
     }
 
     function dibujar(s: ReturnType<typeof estado>) {
-      const abre = lado < 300 ? 0 : s.corrido || 0;
-      const radio = lado * 0.43 * (1 - 0.42 * abre);
-      const cx = lado / 2 - lado * 0.26 * abre;
+      const abre = compacto() ? 0 : s.corrido || 0;
+      // Al abrir, el globo va a la izquierda (aro de 0,035 a 0,405 del ancho) y la tarjeta ocupa el 56 % derecho,
+      // con unos 16 px de aire entre los dos.
+      const radio = lado * (0.43 - 0.252 * abre);
+      const cx = lado * (0.5 - 0.28 * abre);
       proyeccion.scale(radio * s.zoom).translate([cx, lado / 2]).rotate([-s.centro[0], -s.centro[1]]);
       ctx.clearRect(0, 0, lado, lado);
       // Todo se dibuja dentro de un círculo fijo: al acercarse se ve como una lupa, no un cuadrado.
@@ -182,7 +195,7 @@ const filas = arbol.map((a, i) => {
       const tam = Math.min(Math.max(1.4, radio / 150) * 0.85 * Math.sqrt(s.zoom), 3);
       ctx.beginPath();
       for (const p of datos.mundo) if (visible(p)) punto(p, tam);
-      ctx.fillStyle = `rgba(0,61,226,${0.9 - 0.45 * s.peru})`;
+      ctx.fillStyle = `rgba(0,61,226,${(0.9 - 0.45 * s.peru) * (1 - s.mina)})`;
       ctx.fill();
       ctx.beginPath();
       for (const p of datos.peru) if (visible(p)) punto(p, Math.min(tam * 0.55, 1.8));
@@ -212,8 +225,7 @@ const filas = arbol.map((a, i) => {
       ctx.strokeStyle = "rgba(0,61,226,0.8)";
       ctx.lineWidth = 1;
       ctx.stroke();
-      const movil = lado < 300;
-      const texto = s.abierto && movil ? "Ejemplo: catálogo STAC y Parquet" : s.mina > 0.5 ? "Camisea, Cusco" : s.peru > 0.6 ? "Perú" : "";
+      const texto = s.mina > 0.5 ? "Camisea, Cusco" : s.peru > 0.6 ? "Perú" : "";
       if (rotulo.textContent !== texto) rotulo.textContent = texto;
       rotulo.classList.toggle("mina", s.mina > 0.5);
       raiz.classList.toggle("abierto", s.abierto);
